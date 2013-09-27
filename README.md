@@ -12,6 +12,35 @@ The layout of the generated HTML form may be entirely fine-tuned through
 a simple declarative mechanism.
 
 
+# Jsonform::Rails
+
+Jsonform-rails wraps joshfire's JSONForm into an easy to bundle asset gem.
+
+TODO: helpers as the need emerges
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'jsonform-rails'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install jsonform-rails
+
+## Usage
+
+Step 1: Make sure you're calling the javascript file in your application.js. There is no CSS, jsonform styles for bootstrap and lets you handle that:
+
+    //= require jsonform
+
+Step 2: Use is as described in the jsonform doco
+
+
 Getting started
 ---------------
 
