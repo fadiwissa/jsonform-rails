@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Jsonform::Rails::VERSION
   spec.authors       = ["Nathaniel Fitzgerald-Hood"]
   spec.email         = ["nathaniel@widgetworks.com.au"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Asset wrapper gem for joshfire's jsonform: Build forms from JSON Schema. Easily template-able. Compatible with Twitter Bootstrap out of the box.}
+  spec.summary       = %q{Build forms from JSON Schema using Javascript}
+  spec.homepage      = "https://github.com/mrthan/jsonform-rails"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
