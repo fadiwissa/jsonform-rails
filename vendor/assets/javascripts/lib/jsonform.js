@@ -189,7 +189,7 @@ var initializeTabs = function (tabs) {
 
 // Twitter bootstrap-friendly HTML boilerplate for standard inputs
 jsonform.fieldTemplate = function(inner) {
-  return '<div class="control-group jsonform-error-<%= keydash %>' +
+  return '<div class="control-group jsonform-error-<%= keydash %> <%= node.formElement.type?"_jsonform-"+node.formElement.type:"" %>' +
     '<%= elt.htmlClass ? " " + elt.htmlClass : "" %>' +
     '<%= (node.schemaElement && node.schemaElement.required && (node.schemaElement.type !== "boolean") ? " jsonform-required" : "") %>' +
     '<%= (node.readOnly ? " jsonform-readonly" : "") %>' +
@@ -514,7 +514,7 @@ jsonform.elementTypes = {
 
           // Submit the form on next tick
           _.delay(function () {
-            console.log('submit form');
+            // console.log('submit form');
             elt.ownerTree.submit();
           }, 10);
         },
@@ -588,7 +588,7 @@ jsonform.elementTypes = {
 
           // Submit the form on next tick
           _.delay(function () {
-            console.log('submit form');
+            // console.log('submit form');
             elt.ownerTree.submit();
           }, 10);
         },
@@ -778,7 +778,9 @@ jsonform.elementTypes = {
     'onBeforeRender': function(data, node){
       // Can we change the parent/child data types?
       // Set the view on the children?
-      
+      var append = " _jsonform-tablearray";
+      data.elt.htmlClass = data.elt.htmlClass ? data.elt.htmlClass+= append : append;
+
     },
     'onInsert': function(evt, node){
       var $nodeid = $(node.el).find('#' + escapeSelector(node.id));
@@ -797,12 +799,12 @@ jsonform.elementTypes = {
         _.each(headerNode.children, function(formNode){
           // TODO: Skip nested array object types, they'll be put in as their own tables.
           // What about Object types?
-          if (formNode.schemaElement.type != 'array'){
+          // if (formNode.schemaElement.type != 'array'){
             // Everything should have a title.
             headerRow.push('<th>');
               headerRow.push(formNode.title);
             headerRow.push('</th>');
-          }
+          // }
         });
         
         // Wrap with a row and render.
@@ -949,6 +951,7 @@ jsonform.elementTypes = {
     // 'template': '<tbody><tr><td>table object</td></tr></tbody>',
     'template': '<tbody id="<%= id %>"><%= children %></tbody>',
     'fieldtemplate': false,
+    'childSelector': '> tbody',
     'onBeforeRender': function(data, node){
       // Check the index here -> output that in the 
       //console.log('tableobject: data=', data, '\nnode=', node);
@@ -973,36 +976,39 @@ jsonform.elementTypes = {
         data.columnCount = simpleCount;
       }
     },
-    'childTemplate': function(inner, data, childNode){
+    'childTemplate': function(inner, data, node, parentData){
       //'<td></td>'
       // TODO: How do we know how many children we have?
       
-      // Check the child's type.
-      if (data.childMap && childNode.schemaElement){
-        if (childNode.schemaElement.type == 'array'){
-          // Complex type.
-          // TODO: Need to know the colspan.
-          data.childMap.complex.push('<tr>', '<td colspan="'+data.columnCount+'">', inner, '</td>', '</tr>');
-        } else {
-          // simple type
-          data.childMap.simple.push('<td>'+inner+'</td>');
-        }
-      }
+      // // Check the child's type.
+      // if (parentData.childMap && node.schemaElement){
+      //   if (node.schemaElement.type == 'array'){
+      //     // Complex type.
+      //     // TODO: Need to know the colspan.
+      //     parentData.childMap.complex.push('<tr>', '<td colspan="'+parentData.columnCount+'">', inner, '</td>', '</tr>');
+      //   } else {
+      //     // simple type
+      //     parentData.childMap.simple.push('<td>'+inner+'</td>');
+      //   }
+      // }
       
-      return inner;
+      // return inner;
+      return '<td>'+inner+'</td>';
     },
     onBeforeTemplate: function(data, node){
-      if (data.childMap){
-        var childMap = data.childMap;
-        // NOTE: At some point we need to wrap the simple elements in a row.
-        // Squash the child data down to a string and then set as `node.children`.
-        if (childMap.simple.length){
-          childMap.simple.unshift('<tr>');
-          childMap.simple.push('</tr>');
-        }
+
+
+      // if (data.childMap){
+      //   var childMap = data.childMap;
+      //   // NOTE: At some point we need to wrap the simple elements in a row.
+      //   // Squash the child data down to a string and then set as `node.children`.
+      //   if (childMap.simple.length){
+      //     childMap.simple.unshift('<tr>');
+      //     childMap.simple.push('</tr>');
+      //   }
         
-        data.children = childMap.simple.join('') + childMap.complex.join('');
-      }
+      //   data.children = childMap.simple.join('') + childMap.complex.join('');
+      // }
     }
   },
   'array': {
@@ -2762,7 +2768,12 @@ formNode.prototype.setContent = function (html, parentEl) {
   }
   else {
     // Insert the node in the DOM if it's not already there
-    nextSibling = $(parentNode).children().get(this.childPos);
+    //coridyn : tables always have 1 element, the header row
+    //this.view.childSelector
+    var childSelector = (this.view && this.view.childSelector) ? this.view.childSelector : '';
+    nextSibling = $(parentNode).children(childSelector).get(this.childPos); //assumes parent is empty if no children
+    
+
     if (nextSibling) {
       $(nextSibling).before(node);
     }
@@ -2797,8 +2808,6 @@ formNode.prototype.updateElement = function (domNode) {
     // NOTE: The id in the if statement should NOT be escaped.
     if (this.el == null || this.el.attr('id') != this.id){
       this.el = $('#' + escapeSelector(this.id), domNode).get(0);
-    } else {
-      console.log('same id');
     }
     
     if (this.view && this.view.getElement) {
@@ -2835,7 +2844,7 @@ formNode.prototype.updateElement = function (domNode) {
  *
  * @function
  */
-formNode.prototype.generate = function () {
+formNode.prototype.generate = function (parentData) {
   var data = {
     id: this.id,
     keydash: this.keydash,
@@ -2877,25 +2886,30 @@ formNode.prototype.generate = function () {
   }
 
   // Wrap the content in the child template of its parent if necessary.
-  // if (this.parentNode && this.parentNode.view &&
-  //   this.parentNode.view.childTemplate) {
-  //   // 2013-10-16 Coridyn:
-  //   // Pass the data through to the `childTemplate` method.
-  //   // 
-  //   // TODO: Perhaps move this into the loop over the children below?
-  //   // Do we know the index of the child that way?
-  //   template = this.parentNode.view.childTemplate(template, data);
-  // }
+  if (this.parentNode && this.parentNode.view &&
+    this.parentNode.view.childTemplate) {
+    // 2013-10-16 Coridyn:
+    // Pass the data through to the `childTemplate` method.
+    // 
+    // TODO: Perhaps move this into the loop over the children below?
+    // Do we know the index of the child that way?
+
+    // Force the content to be processed.
+    // template = _.template(template, data, fieldTemplateSettings);
+
+    template = this.parentNode.view.childTemplate(template, data, this, parentData);
+  }
 
   // Prepare the HTML of the children
   var childrenhtml = '';
   var childHtml = '';
   _.each(this.children, function (child) {
     // 2013-10-16 Coridyn: Have the parent call childTemplate for each child and pass the data through.
-    childHtml = child.generate();
-    if (this.view && this.view.childTemplate){
-      childHtml = this.view.childTemplate(childHtml, data, child);
-    }
+    childHtml = child.generate(data);
+    // if (this.view && this.view.childTemplate){
+    //   childHtml = this.view.childTemplate(childHtml, data, child);
+    //   childHtml = _.template(childHtml, childData, fieldTemplateSettings);
+    // }
     childrenhtml += childHtml;
   }, this);
   data.children = childrenhtml;
