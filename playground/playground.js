@@ -242,6 +242,7 @@ $('document').ready(function () {
           // Object item in an array.
           node.view = JSONForm.fieldTypes['tableobject'];
           console.log('@@@tableobject\ndata=', data, '\nnode=', node);
+          
         } else if (getParentType(node.parentNode) == 'array' && getParentType(node) == 'object') {
           // Sub-property of the object item in an array.
           // The parent is an object on an array.
