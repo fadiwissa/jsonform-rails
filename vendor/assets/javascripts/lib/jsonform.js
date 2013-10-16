@@ -758,6 +758,253 @@ jsonform.elementTypes = {
       data.choiceshtml = choiceshtml;
     }
   },
+  'tablearray': {
+    'template': '<div id="<%= id %>">'+
+      '<table class="_jsonform-tablearray table <%= elt.htmlClass?elt.htmlClass:"" %>">' + 
+        '<thead></thead>' +
+        '<%= children %>' + 
+      '</table>' +
+      '<span class="_jsonform-array-buttons">' +
+        '<a href="#" class="btn _jsonform-array-addmore"><i class="icon-plus-sign" title="Add new"></i></a> ' +
+        '<a href="#" class="btn _jsonform-array-deletelast"><i class="icon-minus-sign" title="Delete last"></i></a>' +
+      '</span>' +
+      '</div>',
+    'array': true,
+    'fieldtemplate': true,
+    // 'childTemplate': function(inner){
+    //   // Wrap everything in a <tbody></tbody>??
+    //   return;
+    // },
+    'onBeforeRender': function(data, node){
+      // Can we change the parent/child data types?
+      // Set the view on the children?
+      
+    },
+    'onInsert': function(evt, node){
+      var $nodeid = $(node.el).find('#' + escapeSelector(node.id));
+      var boundaries = node.getArrayBoundaries();
+      
+      // TODO: Render the heading row.
+      // TODO: Take a count of the number of children so we know how many columns there are.
+      // How do we handle nested arrays?
+      // If any items have a sub-array then do all of the children need to be in a full table?
+      if (node.children && node.children.length){
+        var headerNode = node.children[0];
+        var header = $nodeid.find('> table > thead');
+        var headerRow = [];
+        
+        // Iterate over each of the children and render out the header.
+        _.each(headerNode.children, function(formNode){
+          // TODO: Skip nested array object types, they'll be put in as their own tables.
+          // What about Object types?
+          if (formNode.schemaElement.type != 'array'){
+            // Everything should have a title.
+            headerRow.push('<th>');
+              headerRow.push(formNode.title);
+            headerRow.push('</th>');
+          }
+        });
+        
+        // Wrap with a row and render.
+        if (headerRow.length){
+          headerRow.unshift('<tr>');
+          headerRow.push('</tr>');
+          header.append(headerRow.join(''));
+        }
+      }
+      
+      // // Switch two nodes in an array
+      // var moveNodeTo = function (fromIdx, toIdx) {
+      //   // Note "switchValuesWith" extracts values from the DOM since field
+      //   // values are not synchronized with the tree data structure, so calls
+      //   // to render are needed at each step to force values down to the DOM
+      //   // before next move.
+      //   // TODO: synchronize field values and data structure completely and
+      //   // call render only once to improve efficiency.
+      //   if (fromIdx === toIdx) return;
+      //   var incr = (fromIdx < toIdx) ? 1: -1;
+      //   var i = 0;
+      //   var parentEl = $('> ul', $nodeid);
+      //   for (i = fromIdx; i !== toIdx; i += incr) {
+      //     node.children[i].switchValuesWith(node.children[i + incr]);
+      //     node.children[i].render(parentEl.get(0));
+      //     node.children[i + incr].render(parentEl.get(0));
+      //   }
+
+      //   // No simple way to prevent DOM reordering with jQuery UI Sortable,
+      //   // so we're going to need to move sorted DOM elements back to their
+      //   // origin position in the DOM ourselves (we switched values but not
+      //   // DOM elements)
+      //   var fromEl = $(node.children[fromIdx].el);
+      //   var toEl = $(node.children[toIdx].el);
+      //   fromEl.detach();
+      //   toEl.detach();
+      //   if (fromIdx < toIdx) {
+      //     if (fromIdx === 0) parentEl.prepend(fromEl);
+      //     else $(node.children[fromIdx-1].el).after(fromEl);
+      //     $(node.children[toIdx-1].el).after(toEl);
+      //   }
+      //   else {
+      //     if (toIdx === 0) parentEl.prepend(toEl);
+      //     else $(node.children[toIdx-1].el).after(toEl);
+      //     $(node.children[fromIdx-1].el).after(fromEl);
+      //   }
+      // };
+      
+      // TODO: Allow deleting arbitrary rows.
+      var addButton = $nodeid.find('> span > a._jsonform-array-addmore');
+      var deleteButton = $nodeid.find('> span > a._jsonform-array-deletelast');
+      
+      var addItem = function (idx) {
+        if (boundaries.maxItems >= 0) {
+          if (node.children.length > boundaries.maxItems - 2) {
+            addButton.addClass('disabled');
+          }
+          if (node.children.length > boundaries.maxItems - 1) {
+            return false;
+          }
+        }
+        // node.insertArrayItem(idx, $('> ul', $nodeid).get(0));
+        node.insertArrayItem(idx, $('> table', $nodeid).get(0));
+        if ((boundaries.minItems <= 0) ||
+            ((boundaries.minItems > 0) &&
+              (node.children.length > boundaries.minItems - 1))) {
+          deleteButton.removeClass('disabled');
+        }
+      }
+
+      var deleteItem = function (idx) {
+        if (boundaries.minItems > 0) {
+          if (node.children.length < boundaries.minItems + 2) {
+            deleteButton.addClass('disabled');
+          }
+          if (node.children.length <= boundaries.minItems) {
+            return false;
+          }
+        }
+        else if (node.children.length === 1) {
+          deleteButton.addClass('disabled');
+        }
+        node.deleteArrayItem(idx);
+        if ((boundaries.maxItems >= 0) && (idx <= boundaries.maxItems - 1)) {
+          addButton.removeClass('disabled');
+        }
+      }
+
+      addButton.click(function (evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        var idx = node.children.length;
+        addItem(idx);
+      });
+
+      //Simulate Users click to setup the form with its minItems
+      // var curItems = $('> ul > li', $nodeid).length;
+      var tableSelector = '> table';
+      var bodySelector = '> table > tbody';
+      
+      var curItems = $(bodySelector, $nodeid).length;
+      if ((boundaries.minItems > 0) &&
+          (curItems < boundaries.minItems)) {
+        for (var i = 0; i < (boundaries.minItems - 1) && ($nodeid.find(bodySelector).length < boundaries.minItems); i++) {
+          //console.log('Calling click: ',$nodeid);
+          //$('> span > a._jsonform-array-addmore', $nodeid).click();
+          // node.insertArrayItem(curItems, $nodeid.find('> ul').get(0));
+          node.insertArrayItem(curItems, $nodeid.find('> table').get(0));
+        }
+      }
+      if ((boundaries.minItems > 0) &&
+          (node.children.length <= boundaries.minItems)) {
+        deleteButton.addClass('disabled');
+      }
+
+      deleteButton.click(function (evt) {
+        var idx = node.children.length - 1;
+        evt.preventDefault();
+        evt.stopPropagation();
+        deleteItem(idx);
+      });
+      
+      // Allows deleting any index in the array.
+      $nodeid.on('click', '._jsonform-array-item-delete', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var idx = $(e.currentTarget).parent().data('idx');
+        deleteItem(idx);
+      });
+
+      // if ($(node.el).sortable) {
+      //   $('> ul', $nodeid).sortable();
+      //   $('> ul', $nodeid).bind('sortstop', function (event, ui) {
+      //     var idx = $(ui.item).data('idx');
+      //     var newIdx = $(ui.item).index();
+      //     moveNodeTo(idx, newIdx);
+      //   });
+      // }
+    }
+  },
+  'tableobject': {
+    // A sub-child of tablearray.
+    // Need to know if we should render the header.
+    // 'template': '<tbody><tr><td>table object</td></tr></tbody>',
+    'template': '<tbody id="<%= id %>"><%= children %></tbody>',
+    'fieldtemplate': false,
+    'onBeforeRender': function(data, node){
+      // Check the index here -> output that in the 
+      //console.log('tableobject: data=', data, '\nnode=', node);
+      
+      // Create a map of children and their types.
+      // Simple children just go in a <td> but complex types might need their own <tr>.
+      //data.
+      data.childMap = {
+        simple: [], // a single row holds everything, wrap each item in a <td></td>
+        complex: [] // a single row for every item, wrap each item in a <tr><td colspan="x"></td></tr>
+      }
+      
+      // TODO: Handle multiple <tr> elements for nested tables.
+      // TODO: Need to count the number of 'simple' elements that will form the rows.
+      if (data.schema && data.schema.properties){
+        var simpleCount = 0;
+        _.each(data.schema.properties, function(dataType){
+          if (dataType.type != 'array'){
+            simpleCount++;
+          }
+        });
+        data.columnCount = simpleCount;
+      }
+    },
+    'childTemplate': function(inner, data, childNode){
+      //'<td></td>'
+      // TODO: How do we know how many children we have?
+      
+      // Check the child's type.
+      if (data.childMap && childNode.schemaElement){
+        if (childNode.schemaElement.type == 'array'){
+          // Complex type.
+          // TODO: Need to know the colspan.
+          data.childMap.complex.push('<tr>', '<td colspan="'+data.columnCount+'">', inner, '</td>', '</tr>');
+        } else {
+          // simple type
+          data.childMap.simple.push('<td>'+inner+'</td>');
+        }
+      }
+      
+      return inner;
+    },
+    onBeforeTemplate: function(data, node){
+      if (data.childMap){
+        var childMap = data.childMap;
+        // NOTE: At some point we need to wrap the simple elements in a row.
+        // Squash the child data down to a string and then set as `node.children`.
+        if (childMap.simple.length){
+          childMap.simple.unshift('<tr>');
+          childMap.simple.push('</tr>');
+        }
+        
+        data.children = childMap.simple.join('') + childMap.complex.join('');
+      }
+    }
+  },
   'array': {
     'template': '<div id="<%= id %>"><ul class="_jsonform-array-ul" style="list-style-type:none;"><%= children %></ul>' +
       '<span class="_jsonform-array-buttons">' +
@@ -772,7 +1019,8 @@ jsonform.elementTypes = {
         // Insert a "draggable" icon
         // floating to the left of the main element
         return '<li data-idx="<%= node.childPos %>">' +
-          '<span class="draggable line"><i class="icon-list" title="Move item"></i></span>' +
+	  '<span class="draggable line"><i class="icon-list" title="Move item"></i></span> ' +
+	  '<a href="#" class="_jsonform-array-item-delete"><i class="icon-remove" title="Remove item"></i></a>' +
           inner +
           '</li>';
       }
@@ -824,10 +1072,7 @@ jsonform.elementTypes = {
         }
       };
 
-      $('> span > a._jsonform-array-addmore', $nodeid).click(function (evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        var idx = node.children.length;
+      var addItem = function (idx) {
         if (boundaries.maxItems >= 0) {
           if (node.children.length > boundaries.maxItems - 2) {
             $nodeid.find('> span > a._jsonform-array-addmore')
@@ -844,6 +1089,34 @@ jsonform.elementTypes = {
           $nodeid.find('> span > a._jsonform-array-deletelast')
             .removeClass('disabled');
         }
+      }
+
+      var deleteItem = function (idx) {
+      	if (boundaries.minItems > 0) {
+      	  if (node.children.length < boundaries.minItems + 2) {
+      	    $nodeid.find('> span > a._jsonform-array-deletelast')
+      	      .addClass('disabled');
+      	  }
+      	  if (node.children.length <= boundaries.minItems) {
+      	    return false;
+      	  }
+      	}
+      	else if (node.children.length === 1) {
+      	  $nodeid.find('> span > a._jsonform-array-deletelast')
+      	    .addClass('disabled');
+      	}
+      	node.deleteArrayItem(idx);
+      	if ((boundaries.maxItems >= 0) && (idx <= boundaries.maxItems - 1)) {
+      	  $nodeid.find('> span > a._jsonform-array-addmore')
+      	    .removeClass('disabled');
+      	}
+      }
+
+      $('> span > a._jsonform-array-addmore', $nodeid).click(function (evt) {
+      	evt.preventDefault();
+      	evt.stopPropagation();
+      	var idx = node.children.length;
+      	addItem(idx);
       });
 
       //Simulate Users click to setup the form with its minItems
@@ -866,24 +1139,14 @@ jsonform.elementTypes = {
         var idx = node.children.length - 1;
         evt.preventDefault();
         evt.stopPropagation();
-        if (boundaries.minItems > 0) {
-          if (node.children.length < boundaries.minItems + 2) {
-            $nodeid.find('> span > a._jsonform-array-deletelast')
-              .addClass('disabled');
-          }
-          if (node.children.length <= boundaries.minItems) {
-            return false;
-          }
-        }
-        else if (node.children.length === 1) {
-          $nodeid.find('> span > a._jsonform-array-deletelast')
-            .addClass('disabled');
-        }
-        node.deleteArrayItem(idx);
-        if ((boundaries.maxItems >= 0) && (idx <= boundaries.maxItems - 1)) {
-          $nodeid.find('> span > a._jsonform-array-addmore')
-            .removeClass('disabled');
-        }
+	      deleteItem(idx);
+      });
+
+      $nodeid.on('click', '._jsonform-array-item-delete', function (e) {
+      	e.preventDefault();
+      	e.stopPropagation();
+      	var idx = $(e.currentTarget).parent().data('idx');
+      	deleteItem(idx);
       });
 
       if ($(node.el).sortable) {
@@ -925,6 +1188,7 @@ jsonform.elementTypes = {
           ((idx === 0) ? ' class="active"' : '') +
           '><a class="draggable tab" data-toggle="tab">' +
           escapeHTML(title) +
+	  ' <span href="#" class="_jsonform-array-item-delete"><i class="icon-remove" title="Remove item"></i></span>' +
           '</a></li>';
       });
       data.tabs = tabs;
@@ -976,6 +1240,7 @@ jsonform.elementTypes = {
           tabs += '<li data-idx="' + idx + '">' +
             '<a class="draggable tab" data-toggle="tab">' +
             escapeHTML(title) +
+	    ' <span href="#" class="_jsonform-array-item-delete"><i class="icon-remove" title="Remove item"></i></span>' +
             '</a></li>';
         });
         $('> .tabbable > .nav-tabs', $nodeid).html(tabs);
@@ -985,10 +1250,7 @@ jsonform.elementTypes = {
         $('> .tabbable > .nav-tabs [data-toggle="tab"]', $nodeid).eq(selIdx).click();
       };
 
-      $('> a._jsonform-array-deleteitem', $nodeid).click(function (evt) {
-        var idx = $('> .tabbable > .nav-tabs .active', $nodeid).data('idx');
-        evt.preventDefault();
-        evt.stopPropagation();
+      var deleteItem = function (idx) {
         if (boundaries.minItems > 0) {
           if (node.children.length < boundaries.minItems + 1) {
             $nodeid.find('> a._jsonform-array-deleteitem')
@@ -1006,10 +1268,8 @@ jsonform.elementTypes = {
             (node.children.length <= boundaries.maxItems)) {
           $nodeid.find('> a._jsonform-array-addmore').removeClass('disabled');
         }
-      });
-
-      $('> a._jsonform-array-addmore', $nodeid).click(function (evt) {
-        var idx = node.children.length;
+      }
+      var addItem = function (idx) {
         if (boundaries.maxItems>=0) {
           if (node.children.length>boundaries.maxItems-2) {
             $('> a._jsonform-array-addmore', $nodeid).addClass("disabled");
@@ -1018,8 +1278,6 @@ jsonform.elementTypes = {
             return false;
           }
         }
-        evt.preventDefault();
-        evt.stopPropagation();
         node.insertArrayItem(idx,
           $nodeid.find('> .tabbable > .tab-content').get(0));
         updateTabs(idx);
@@ -1027,6 +1285,28 @@ jsonform.elementTypes = {
             ((boundaries.minItems > 0) && (idx > boundaries.minItems - 1))) {
           $nodeid.find('> a._jsonform-array-deleteitem').removeClass('disabled');
         }
+      }
+
+      $('> a._jsonform-array-deleteitem', $nodeid).click(function (evt) {
+	var idx = $('> .tabbable > .nav-tabs .active', $nodeid).data('idx');
+	evt.preventDefault();
+	evt.stopPropagation();
+	deleteItem(idx);
+      });
+
+      $('> a._jsonform-array-addmore', $nodeid).click(function (evt) {
+	var idx = node.children.length;
+	evt.preventDefault();
+	evt.stopPropagation();
+	addItem(idx);
+
+      });
+
+      $nodeid.on('click', '._jsonform-array-item-delete', function (e) {
+	e.preventDefault();
+	e.stopPropagation();
+	var idx = $(e.currentTarget).parent().parent().data('idx');
+	deleteItem(idx);
       });
 
       $(node.el).on('legendUpdated', function (evt) {
@@ -2509,7 +2789,18 @@ formNode.prototype.setContent = function (html, parentEl) {
  */
 formNode.prototype.updateElement = function (domNode) {
   if (this.id) {
-    this.el = $('#' + escapeSelector(this.id), domNode).get(0);
+    // 2013-10-16 - Coridyn:
+    // Allow the id to be on the current node element.
+    // Check if the current element is the correct one.
+    // The previous code assumes that the element is a child of `this.el`.
+    // 
+    // NOTE: The id in the if statement should NOT be escaped.
+    if (this.el == null || this.el.attr('id') != this.id){
+      this.el = $('#' + escapeSelector(this.id), domNode).get(0);
+    } else {
+      console.log('same id');
+    }
+    
     if (this.view && this.view.getElement) {
       this.el = this.view.getElement(this.el);
     }
@@ -2586,16 +2877,27 @@ formNode.prototype.generate = function () {
   }
 
   // Wrap the content in the child template of its parent if necessary.
-  if (this.parentNode && this.parentNode.view &&
-    this.parentNode.view.childTemplate) {
-    template = this.parentNode.view.childTemplate(template);
-  }
+  // if (this.parentNode && this.parentNode.view &&
+  //   this.parentNode.view.childTemplate) {
+  //   // 2013-10-16 Coridyn:
+  //   // Pass the data through to the `childTemplate` method.
+  //   // 
+  //   // TODO: Perhaps move this into the loop over the children below?
+  //   // Do we know the index of the child that way?
+  //   template = this.parentNode.view.childTemplate(template, data);
+  // }
 
   // Prepare the HTML of the children
   var childrenhtml = '';
+  var childHtml = '';
   _.each(this.children, function (child) {
-    childrenhtml += child.generate();
-  });
+    // 2013-10-16 Coridyn: Have the parent call childTemplate for each child and pass the data through.
+    childHtml = child.generate();
+    if (this.view && this.view.childTemplate){
+      childHtml = this.view.childTemplate(childHtml, data, child);
+    }
+    childrenhtml += childHtml;
+  }, this);
   data.children = childrenhtml;
 
   data.fieldHtmlClass = '';
@@ -2609,7 +2911,16 @@ formNode.prototype.generate = function () {
       (typeof this.formElement.fieldHtmlClass !== 'undefined')) {
     data.fieldHtmlClass = this.formElement.fieldHtmlClass;
   }
-
+  
+  // 2013-10-16 Coridyn: TODO: Add another callback here 
+  // onBeforeTemplate(data, node);
+  if (this.ownerTree.formDesc.onBeforeTemplate) {
+    this.ownerTree.formDesc.onBeforeTemplate(data, this);
+  }
+  if (this.view.onBeforeTemplate) {
+    this.view.onBeforeTemplate(data, this);
+  }
+  
   // Apply the HTML template
   html = _.template(template, data, fieldTemplateSettings);
   return html;
@@ -2630,7 +2941,15 @@ formNode.prototype.enhance = function () {
   var handlers = null;
   var handler = null;
   var formData = _.clone(this.ownerTree.formDesc.tpldata) || {};
-
+  
+  // Debugging - Coridyn: Callback to form-level onInsert method.
+  // Always call this regardless of if there is a formElement.
+  if (this.ownerTree.formDesc.onInsert) {
+    // Coridyn: Need information about the parent element or the parent tree.
+    this.ownerTree.formDesc.onInsert({ target: $(this.el) }, this);
+  }
+  // End of debugging.
+  
   if (this.formElement) {
     // Check the view associated with the node as it may define an "onInsert"
     // event handler to be run right away
@@ -3539,9 +3858,9 @@ $.fn.jsonForm = function(options) {
 
   // Initialize tabs sections, if any
   initializeTabs(formElt);
-
-  // Initialize expandable sections, if any
-  $('.expandable > div, .expandable > fieldset', formElt).hide();
+  
+  // Hide all which are not expanded.
+  formElt.find('.expandable:not(.expanded)').find('> div, > fieldset').hide();
   $('.expandable > legend', formElt).click(function () {
     var parent = $(this).parent();
     parent.toggleClass('expanded');
