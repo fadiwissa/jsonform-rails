@@ -760,9 +760,9 @@ jsonform.elementTypes = {
   },
   'tablearray': {
     'template': '<div id="<%= id %>">'+
-      '<table class="_jsonform-tablearray table <%= elt.htmlClass?elt.htmlClass:"" %>">' + 
+      '<table class="_jsonform-tablearray table <%= elt.htmlClass?elt.htmlClass:"" %>">' +
         '<thead></thead>' +
-        '<%= children %>' + 
+        '<%= children %>' +
       '</table>' +
       '<span class="_jsonform-array-buttons">' +
         '<a href="#" class="btn _jsonform-array-addmore"><i class="icon-plus-sign" title="Add new"></i></a> ' +
@@ -785,7 +785,7 @@ jsonform.elementTypes = {
     'onInsert': function(evt, node){
       var $nodeid = $(node.el).find('#' + escapeSelector(node.id));
       var boundaries = node.getArrayBoundaries();
-      
+
       // TODO: Render the heading row.
       // TODO: Take a count of the number of children so we know how many columns there are.
       // How do we handle nested arrays?
@@ -794,7 +794,7 @@ jsonform.elementTypes = {
         var headerNode = node.children[0];
         var header = $nodeid.find('> table > thead');
         var headerRow = [];
-        
+
         // Iterate over each of the children and render out the header.
         _.each(headerNode.children, function(formNode){
           // TODO: Skip nested array object types, they'll be put in as their own tables.
@@ -806,7 +806,7 @@ jsonform.elementTypes = {
             headerRow.push('</th>');
           // }
         });
-        
+
         // Wrap with a row and render.
         if (headerRow.length){
           headerRow.unshift('<tr>');
@@ -814,7 +814,7 @@ jsonform.elementTypes = {
           header.append(headerRow.join(''));
         }
       }
-      
+
       // // Switch two nodes in an array
       // var moveNodeTo = function (fromIdx, toIdx) {
       //   // Note "switchValuesWith" extracts values from the DOM since field
@@ -852,11 +852,11 @@ jsonform.elementTypes = {
       //     $(node.children[fromIdx-1].el).after(fromEl);
       //   }
       // };
-      
+
       // TODO: Allow deleting arbitrary rows.
       var addButton = $nodeid.find('> span > a._jsonform-array-addmore');
       var deleteButton = $nodeid.find('> span > a._jsonform-array-deletelast');
-      
+
       var addItem = function (idx) {
         if (boundaries.maxItems >= 0) {
           if (node.children.length > boundaries.maxItems - 2) {
@@ -904,7 +904,7 @@ jsonform.elementTypes = {
       // var curItems = $('> ul > li', $nodeid).length;
       var tableSelector = '> table';
       var bodySelector = '> table > tbody';
-      
+
       var curItems = $(bodySelector, $nodeid).length;
       if ((boundaries.minItems > 0) &&
           (curItems < boundaries.minItems)) {
@@ -926,7 +926,7 @@ jsonform.elementTypes = {
         evt.stopPropagation();
         deleteItem(idx);
       });
-      
+
       // Allows deleting any index in the array.
       $nodeid.on('click', '._jsonform-array-item-delete', function (e) {
         e.preventDefault();
@@ -953,9 +953,9 @@ jsonform.elementTypes = {
     'fieldtemplate': false,
     'childSelector': '> tbody',
     'onBeforeRender': function(data, node){
-      // Check the index here -> output that in the 
+      // Check the index here -> output that in the
       //console.log('tableobject: data=', data, '\nnode=', node);
-      
+
       // Create a map of children and their types.
       // Simple children just go in a <td> but complex types might need their own <tr>.
       //data.
@@ -963,7 +963,7 @@ jsonform.elementTypes = {
         simple: [], // a single row holds everything, wrap each item in a <td></td>
         complex: [] // a single row for every item, wrap each item in a <tr><td colspan="x"></td></tr>
       }
-      
+
       // TODO: Handle multiple <tr> elements for nested tables.
       // TODO: Need to count the number of 'simple' elements that will form the rows.
       if (data.schema && data.schema.properties){
@@ -979,7 +979,7 @@ jsonform.elementTypes = {
     'childTemplate': function(inner, data, node, parentData){
       //'<td></td>'
       // TODO: How do we know how many children we have?
-      
+
       // // Check the child's type.
       // if (parentData.childMap && node.schemaElement){
       //   if (node.schemaElement.type == 'array'){
@@ -991,7 +991,7 @@ jsonform.elementTypes = {
       //     parentData.childMap.simple.push('<td>'+inner+'</td>');
       //   }
       // }
-      
+
       // return inner;
       return '<td>'+inner+'</td>';
     },
@@ -1006,7 +1006,7 @@ jsonform.elementTypes = {
       //     childMap.simple.unshift('<tr>');
       //     childMap.simple.push('</tr>');
       //   }
-        
+
       //   data.children = childMap.simple.join('') + childMap.complex.join('');
       // }
     }
@@ -2775,7 +2775,7 @@ formNode.prototype.setContent = function (html, parentEl) {
     //this.view.childSelector
     var childSelector = (this.view && this.view.childSelector) ? this.view.childSelector : '';
     nextSibling = $(parentNode).children(childSelector).get(this.childPos); //assumes parent is empty if no children
-    
+
 
     if (nextSibling) {
       $(nextSibling).before(node);
@@ -2807,12 +2807,12 @@ formNode.prototype.updateElement = function (domNode) {
     // Allow the id to be on the current node element.
     // Check if the current element is the correct one.
     // The previous code assumes that the element is a child of `this.el`.
-    // 
+    //
     // NOTE: The id in the if statement should NOT be escaped.
     if (this.el == null || this.el.attr('id') != this.id){
       this.el = $('#' + escapeSelector(this.id), domNode).get(0);
     }
-    
+
     if (this.view && this.view.getElement) {
       this.el = this.view.getElement(this.el);
     }
@@ -2893,7 +2893,7 @@ formNode.prototype.generate = function (parentData) {
     this.parentNode.view.childTemplate) {
     // 2013-10-16 Coridyn:
     // Pass the data through to the `childTemplate` method.
-    // 
+    //
     // TODO: Perhaps move this into the loop over the children below?
     // Do we know the index of the child that way?
 
@@ -2928,8 +2928,8 @@ formNode.prototype.generate = function (parentData) {
       (typeof this.formElement.fieldHtmlClass !== 'undefined')) {
     data.fieldHtmlClass = this.formElement.fieldHtmlClass;
   }
-  
-  // 2013-10-16 Coridyn: TODO: Add another callback here 
+
+  // 2013-10-16 Coridyn: TODO: Add another callback here
   // onBeforeTemplate(data, node);
   if (this.ownerTree.formDesc.onBeforeTemplate) {
     this.ownerTree.formDesc.onBeforeTemplate(data, this);
@@ -2937,7 +2937,7 @@ formNode.prototype.generate = function (parentData) {
   if (this.view.onBeforeTemplate) {
     this.view.onBeforeTemplate(data, this);
   }
-  
+
   // Apply the HTML template
   html = _.template(template, data, fieldTemplateSettings);
   return html;
