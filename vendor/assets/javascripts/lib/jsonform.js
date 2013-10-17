@@ -132,8 +132,8 @@ var initializeTabs = function (tabs) {
     // Disable all fields in other tabs
     $target.parent()
       .children(':not([data-idx=' + targetIndex + '])')
-      .find('input, textarea, select')
-      .attr('disabled', 'disabled');
+      .find('input, textarea, select');
+      //NFH - .attr('disabled', 'disabled');
   };
 
   var optionSelected = function (e) {
