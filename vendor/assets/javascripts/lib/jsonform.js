@@ -3345,7 +3345,17 @@
         var node = new formNode();
         var view = null;
         var key = null;
-
+        
+        // XXX: we now support setup formElement for specific key by customFormItems
+        if (formElement.key && this.formDesc.customFormItems) {
+            var formEl = this.formDesc.customFormItems[formElement.key];
+            if (formEl !== undefined) {
+                formEl.key = formElement.key;
+                formEl.keyOnParent = formElement.keyOnParent;
+                formElement = formEl;
+            }
+        }
+        
         // The form element parameter directly comes from the initial
         // JSONForm object. We'll make a shallow copy of it and of its children
         // not to pollute the original object.
