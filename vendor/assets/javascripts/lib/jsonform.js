@@ -385,6 +385,10 @@
             'fieldtemplate': true,
             'inputfield': true,
             'onInsert': function (evt, node) {
+                
+                // 2016-08-14
+                // TODO: See here on making editor resizable: http://jsbin.com/ojijeb/645/edit?html,css,js,output
+                
                 var setup = function () {
                     var formElement = node.formElement || {};
                     var ace = window.ace;
@@ -398,6 +402,9 @@
 
                     if (formElement.aceMode) {
                         editor.getSession().setMode("ace/mode/"+formElement.aceMode);
+                    }
+                    if (formElement.aceOptions){
+                        editor.setOptions(formElement.aceOptions);
                     }
                     editor.getSession().setTabSize(2);
 
@@ -428,13 +435,19 @@
                     return;
                 }
 
-                // Wait until ACE is loaded
-                var itv = window.setInterval(function() {
-                    if (window.ace) {
-                        window.clearInterval(itv);
-                        setup();
-                    }
-                },1000);
+                if (window.ace){
+                    // Setup immediately
+                    setup();
+                } else {
+                    // Wait until ACE is loaded
+                    var itv = window.setInterval(function() {
+                        if (window.ace) {
+                            window.clearInterval(itv);
+                            setup();
+                        }
+                    },1000);
+                }
+                
             }
         },
         'checkbox':{
