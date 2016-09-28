@@ -385,10 +385,10 @@
             'fieldtemplate': true,
             'inputfield': true,
             'onInsert': function (evt, node) {
-                
+
                 // 2016-08-14
                 // TODO: See here on making editor resizable: http://jsbin.com/ojijeb/645/edit?html,css,js,output
-                
+
                 var setup = function () {
                     var formElement = node.formElement || {};
                     var ace = window.ace;
@@ -398,7 +398,8 @@
                     // (ACE is ok with "\r" on pasting but fails to return "\r" when value is extracted)
                     editor.getSession().setNewLineMode('unix');
                     editor.renderer.setShowPrintMargin(false);
-                    editor.setTheme("ace/theme/"+(formElement.aceTheme||"twilight"));
+                    editor.setTheme("ace/theme/"+(formElement.aceTheme||"chrome"));
+                    editor.setFontSize(14);
 
                     if (formElement.aceMode) {
                         editor.getSession().setMode("ace/mode/"+formElement.aceMode);
@@ -447,7 +448,7 @@
                         }
                     },1000);
                 }
-                
+
             }
         },
         'checkbox':{
@@ -966,7 +967,7 @@
             'fieldtemplate': false,
             'childSelector': '> tbody',
             'onBeforeRender': function(data, node){
-                // Check the index here -> output that in the 
+                // Check the index here -> output that in the
                 //console.log('tableobject: data=', data, '\nnode=', node);
 
                 // Create a map of children and their types.
@@ -2820,7 +2821,7 @@
             // Allow the id to be on the current node element.
             // Check if the current element is the correct one.
             // The previous code assumes that the element is a child of `this.el`.
-            // 
+            //
             // NOTE: The id in the if statement should NOT be escaped.
             if (this.el == null || this.el.attr('id') != this.id){
                 this.el = $('#' + escapeSelector(this.id), domNode).get(0);
@@ -2906,7 +2907,7 @@
             this.parentNode.view.childTemplate) {
             // 2013-10-16 Coridyn:
             // Pass the data through to the `childTemplate` method.
-            // 
+            //
             // TODO: Perhaps move this into the loop over the children below?
             // Do we know the index of the child that way?
 
@@ -2942,7 +2943,7 @@
             data.fieldHtmlClass = this.formElement.fieldHtmlClass;
         }
 
-        // 2013-10-16 Coridyn: TODO: Add another callback here 
+        // 2013-10-16 Coridyn: TODO: Add another callback here
         // onBeforeTemplate(data, node);
         if (this.ownerTree.formDesc.onBeforeTemplate) {
             this.ownerTree.formDesc.onBeforeTemplate(data, this);
@@ -3358,7 +3359,7 @@
         var node = new formNode();
         var view = null;
         var key = null;
-        
+
         // XXX: we now support setup formElement for specific key by customFormItems
         if (formElement.key && this.formDesc.customFormItems) {
             var formEl = this.formDesc.customFormItems[formElement.key];
@@ -3368,7 +3369,7 @@
                 formElement = formEl;
             }
         }
-        
+
         // The form element parameter directly comes from the initial
         // JSONForm object. We'll make a shallow copy of it and of its children
         // not to pollute the original object.
