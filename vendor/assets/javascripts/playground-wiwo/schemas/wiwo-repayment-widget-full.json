@@ -1,0 +1,2973 @@
+{
+  "$wiwoVersion": "wiwo-repayment-widget#11.2.0",
+  "schema": {
+    "config-repayment-products": {
+      "type": "object",
+      "id": "http://jsonschema.net/config-repayment-products",
+      "required": true,
+      "properties": {
+        "VERSION": {
+          "type": "number",
+          "id": "http://jsonschema.net/config-repayment-products/VERSION",
+          "required": true,
+          "title": "VERSION",
+          "default": 3,
+          "readOnly": true
+        },
+        "products": {
+          "type": "array",
+          "id": "http://jsonschema.net/config-repayment-products/products",
+          "required": true,
+          "items": {
+            "type": "object",
+            "id": "http://jsonschema.net/config-repayment-products/products/0",
+            "required": true,
+            "properties": {
+              "id": {
+                "type": "string",
+                "id": "http://jsonschema.net/config-repayment-products/products/0/id",
+                "required": true,
+                "title": "Id"
+              },
+              "name": {
+                "type": "string",
+                "id": "http://jsonschema.net/config-repayment-products/products/0/name",
+                "required": true,
+                "title": "Name"
+              },
+              "fee": {
+                "type": "object",
+                "id": "http://jsonschema.net/config-repayment-products/products/0/fee",
+                "required": true,
+                "properties": {
+                  "initial": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/config-repayment-products/products/0/fee/initial",
+                    "required": true,
+                    "title": "Initial"
+                  },
+                  "discharge": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/config-repayment-products/products/0/fee/discharge",
+                    "required": true,
+                    "title": "Discharge"
+                  },
+                  "monthly": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/config-repayment-products/products/0/fee/monthly",
+                    "required": true,
+                    "title": "Monthly"
+                  },
+                  "annual": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/config-repayment-products/products/0/fee/annual",
+                    "required": true,
+                    "title": "Annual"
+                  }
+                },
+                "title": "Fee",
+                "additionalProperties": false
+              },
+              "limits": {
+                "type": "array",
+                "id": "http://jsonschema.net/config-repayment-products/products/0/limits",
+                "required": false,
+                "items": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0",
+                  "required": true,
+                  "properties": {
+                    "loanRange": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/loanRange",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/loanRange/min",
+                          "required": true,
+                          "title": "Min",
+                          "minimum": -1,
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/loanRange/max",
+                          "required": true,
+                          "title": "Max",
+                          "minimum": -1,
+                          "default": -1
+                        }
+                      },
+                      "title": "Loan Range",
+                      "additionalProperties": false
+                    },
+                    "term": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/term",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/term/min",
+                          "required": true,
+                          "title": "Min",
+                          "minimum": -1,
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/term/max",
+                          "required": true,
+                          "title": "Max",
+                          "minimum": -1,
+                          "default": -1
+                        }
+                      },
+                      "title": "Term",
+                      "additionalProperties": false
+                    },
+                    "lvr": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/lvr",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/lvr/min",
+                          "required": true,
+                          "title": "Min",
+                          "minimum": -1,
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/lvr/max",
+                          "required": true,
+                          "title": "Max",
+                          "minimum": -1,
+                          "default": -1
+                        },
+                        "defaultValue": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/lvr/defaultValue",
+                          "required": true,
+                          "title": "Default Value",
+                          "minimum": -1,
+                          "default": -1
+                        }
+                      },
+                      "title": "Lvr",
+                      "additionalProperties": false
+                    },
+                    "propertyPrice": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/propertyPrice",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/propertyPrice/min",
+                          "required": true,
+                          "title": "Min",
+                          "minimum": -1,
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/limits/0/propertyPrice/max",
+                          "required": true,
+                          "title": "Max",
+                          "minimum": -1,
+                          "default": -1
+                        }
+                      },
+                      "title": "Property Price",
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "title": "Limits",
+                "minItems": 0,
+                "maxItems": 1
+              },
+              "rateDefaults": {
+                "type": "array",
+                "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults",
+                "required": false,
+                "items": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0",
+                  "required": true,
+                  "properties": {
+                    "loanRange": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/loanRange",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/loanRange/min",
+                          "required": true,
+                          "title": "Min",
+                          "default": 0,
+                          "minimum": -1,
+                          "maximum": 999999999
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/loanRange/max",
+                          "required": true,
+                          "title": "Max",
+                          "default": 999999999,
+                          "minimum": -1,
+                          "maximum": 999999999
+                        }
+                      },
+                      "title": "Loan Range",
+                      "additionalProperties": false
+                    },
+                    "term": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/term",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/term/min",
+                          "required": true,
+                          "title": "Min",
+                          "default": 1,
+                          "minimum": -1,
+                          "maximum": 99
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/term/max",
+                          "required": true,
+                          "title": "Max",
+                          "default": 30,
+                          "minimum": -1,
+                          "maximum": 99
+                        }
+                      },
+                      "title": "Term",
+                      "additionalProperties": false
+                    },
+                    "lvr": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/lvr",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/lvr/min",
+                          "required": true,
+                          "title": "Min",
+                          "default": 0,
+                          "minimum": -1,
+                          "maximum": 1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/lvr/max",
+                          "required": true,
+                          "title": "Max",
+                          "default": 1,
+                          "minimum": -1,
+                          "maximum": 1
+                        }
+                      },
+                      "title": "Lvr",
+                      "additionalProperties": false
+                    },
+                    "features": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/features",
+                      "required": true,
+                      "properties": {
+                        "extraRepayment": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/features/extraRepayment",
+                          "required": true,
+                          "title": "Extra Repayment",
+                          "default": -1
+                        },
+                        "offset": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/features/offset",
+                          "required": true,
+                          "title": "Offset",
+                          "minimum": -1,
+                          "maximum": 1,
+                          "default": 1
+                        }
+                      },
+                      "title": "Features",
+                      "additionalProperties": false
+                    },
+                    "interestType": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/interestType",
+                      "required": false,
+                      "title": "Interest Type"
+                    },
+                    "repaymentType": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/repaymentType",
+                      "required": false,
+                      "title": "Repayment Type"
+                    },
+                    "rate": {
+                      "type": "number",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/rate",
+                      "required": true,
+                      "title": "Rate",
+                      "default": -1,
+                      "minimum": -1,
+                      "maximum": 1
+                    },
+                    "productId": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/productId",
+                      "required": false,
+                      "title": "Product Id"
+                    },
+                    "rateDiscount": {
+                      "type": "number",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/rateDiscount",
+                      "required": true,
+                      "title": "Rate Discount",
+                      "default": 0,
+                      "minimum": -1,
+                      "maximum": 1
+                    },
+                    "comparisonRate": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rateDefaults/0/comparisonRate",
+                      "required": false,
+                      "title": "Comparison Rate",
+                      "default": "0% p.a."
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "title": "Rate Defaults",
+                "minItems": 0,
+                "maxItems": 1
+              },
+              "rates": {
+                "type": "array",
+                "id": "http://jsonschema.net/config-repayment-products/products/0/rates",
+                "required": true,
+                "items": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0",
+                  "required": true,
+                  "properties": {
+                    "loanRange": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/loanRange",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/loanRange/min",
+                          "required": true,
+                          "title": "Min",
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/loanRange/max",
+                          "required": true,
+                          "title": "Max",
+                          "default": -1
+                        }
+                      },
+                      "title": "Loan Range",
+                      "additionalProperties": false
+                    },
+                    "term": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/term",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/term/min",
+                          "required": true,
+                          "title": "Min",
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/term/max",
+                          "required": true,
+                          "title": "Max",
+                          "default": -1
+                        }
+                      },
+                      "title": "Term",
+                      "additionalProperties": false
+                    },
+                    "lvr": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/lvr",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/lvr/min",
+                          "required": true,
+                          "title": "Min",
+                          "minimum": -1,
+                          "maximum": 1,
+                          "default": -1
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/lvr/max",
+                          "required": true,
+                          "title": "Max",
+                          "minimum": -1,
+                          "maximum": 1,
+                          "default": -1
+                        }
+                      },
+                      "title": "Lvr",
+                      "additionalProperties": false
+                    },
+                    "features": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/features",
+                      "required": true,
+                      "properties": {
+                        "extraRepayment": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/features/extraRepayment",
+                          "required": true,
+                          "title": "Extra Repayment",
+                          "default": -1
+                        },
+                        "offset": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/features/offset",
+                          "required": true,
+                          "title": "Offset",
+                          "minimum": -1,
+                          "maximum": 1,
+                          "default": -1
+                        }
+                      },
+                      "title": "Features",
+                      "additionalProperties": false
+                    },
+                    "interestType": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/interestType",
+                      "required": false,
+                      "title": "Interest Type"
+                    },
+                    "repaymentType": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/repaymentType",
+                      "required": false,
+                      "title": "Repayment Type"
+                    },
+                    "rate": {
+                      "type": "number",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/rate",
+                      "required": true,
+                      "title": "Rate",
+                      "default": -1,
+                      "minimum": -1,
+                      "maximum": 1
+                    },
+                    "productId": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/productId",
+                      "required": false,
+                      "title": "Product Id"
+                    },
+                    "rateDiscount": {
+                      "type": "number",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/rateDiscount",
+                      "required": false,
+                      "title": "Rate Discount",
+                      "minimum": -1,
+                      "maximum": 1
+                    },
+                    "comparisonRate": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/config-repayment-products/products/0/rates/0/comparisonRate",
+                      "required": false,
+                      "title": "Comparison Rate",
+                      "default": "0% p.a."
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "title": "Rates"
+              }
+            },
+            "additionalProperties": false
+          },
+          "title": "Products"
+        },
+        "repaymentType": {
+          "type": "array",
+          "id": "http://jsonschema.net/config-repayment-products/repaymentType",
+          "required": true,
+          "items": {
+            "type": "object",
+            "id": "http://jsonschema.net/config-repayment-products/repaymentType/0",
+            "required": true,
+            "properties": {
+              "id": {
+                "type": "string",
+                "id": "http://jsonschema.net/config-repayment-products/repaymentType/0/id",
+                "required": true,
+                "title": "Id"
+              },
+              "label": {
+                "type": "string",
+                "id": "http://jsonschema.net/config-repayment-products/repaymentType/0/label",
+                "required": true,
+                "title": "Label"
+              },
+              "interestOnly": {
+                "type": "boolean",
+                "id": "http://jsonschema.net/config-repayment-products/repaymentType/0/interestOnly",
+                "required": true,
+                "title": "Interest Only"
+              }
+            },
+            "additionalProperties": false
+          },
+          "title": "Repayment Type"
+        }
+      },
+      "title": "Config-repayment-products",
+      "additionalProperties": false
+    },
+    "customer-collector": {
+      "type": "object",
+      "id": "http://jsonschema.net/customer-collector",
+      "required": true,
+      "properties": {
+        "defaults": {
+          "type": "object",
+          "id": "http://jsonschema.net/customer-collector/defaults",
+          "required": true,
+          "properties": {
+            "contactNumberType": {
+              "type": "string",
+              "id": "http://jsonschema.net/customer-collector/defaults/contactNumberType",
+              "required": true,
+              "title": "Contact Number Type"
+            }
+          },
+          "title": "Defaults",
+          "additionalProperties": false
+        },
+        "parameters": {
+          "type": "object",
+          "id": "http://jsonschema.net/customer-collector/parameters",
+          "required": false,
+          "properties": {
+            "contactNumberTypes": {
+              "type": "array",
+              "id": "http://jsonschema.net/customer-collector/parameters/contactNumberTypes",
+              "required": false,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/customer-collector/parameters/contactNumberTypes/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/contactNumberTypes/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/contactNumberTypes/0/label",
+                    "required": true,
+                    "title": "Label"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Contact Number Types",
+              "minItems": 0
+            },
+            "contactTimeOptions": {
+              "type": "array",
+              "id": "http://jsonschema.net/customer-collector/parameters/contactTimeOptions",
+              "required": false,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/customer-collector/parameters/contactTimeOptions/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/contactTimeOptions/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/contactTimeOptions/0/label",
+                    "required": true,
+                    "title": "Label"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Contact Time Options",
+              "minItems": 0
+            },
+            "integrations": {
+              "type": "array",
+              "id": "http://jsonschema.net/customer-collector/parameters/integrations",
+              "required": false,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/customer-collector/parameters/integrations/0",
+                "required": true,
+                "properties": {
+                  "collectorType": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/collectorType",
+                    "required": true,
+                    "title": "Collector Type"
+                  },
+                  "requestForm": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/requestForm",
+                    "required": true,
+                    "title": "Request Form"
+                  },
+                  "isDefault": {
+                    "type": "boolean",
+                    "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/isDefault",
+                    "required": true,
+                    "title": "Is Default"
+                  },
+                  "extendsType": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/extendsType",
+                    "required": false,
+                    "title": "Extends Type"
+                  },
+                  "viewData": {
+                    "type": "array",
+                    "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData",
+                    "required": false,
+                    "items": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0",
+                      "required": true,
+                      "properties": {
+                        "text": {
+                          "type": "object",
+                          "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text",
+                          "required": true,
+                          "properties": {
+                            "title": {
+                              "type": "string",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/title",
+                              "required": true,
+                              "title": "Title"
+                            },
+                            "leader": {
+                              "type": "string",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/leader",
+                              "required": true,
+                              "title": "Leader"
+                            },
+                            "sendSuccess": {
+                              "type": "object",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/sendSuccess",
+                              "required": true,
+                              "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/sendSuccess/title",
+                                  "required": true,
+                                  "title": "Title"
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/sendSuccess/message",
+                                  "required": true,
+                                  "title": "Message"
+                                }
+                              },
+                              "title": "Send Success",
+                              "additionalProperties": false
+                            },
+                            "sendError": {
+                              "type": "object",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/sendError",
+                              "required": true,
+                              "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/sendError/title",
+                                  "required": true,
+                                  "title": "Title"
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/text/sendError/message",
+                                  "required": true,
+                                  "title": "Message"
+                                }
+                              },
+                              "title": "Send Error",
+                              "additionalProperties": false
+                            }
+                          },
+                          "title": "Text",
+                          "additionalProperties": false
+                        },
+                        "formValidation": {
+                          "type": "object",
+                          "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation",
+                          "required": true,
+                          "properties": {
+                            "required": {
+                              "type": "array",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation/required",
+                              "required": false,
+                              "items": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation/required/0",
+                                "required": true
+                              },
+                              "title": "Required",
+                              "minItems": 0
+                            },
+                            "optional": {
+                              "type": "array",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation/optional",
+                              "required": false,
+                              "items": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation/optional/0",
+                                "required": true
+                              },
+                              "title": "Optional",
+                              "minItems": 0
+                            },
+                            "hidden": {
+                              "type": "array",
+                              "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation/hidden",
+                              "required": false,
+                              "items": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/customer-collector/parameters/integrations/0/viewData/0/formValidation/hidden/0",
+                                "required": true
+                              },
+                              "title": "Hidden",
+                              "minItems": 0
+                            }
+                          },
+                          "title": "Form Validation",
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "title": "View Data",
+                    "minItems": 0,
+                    "maxItems": 1
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Integrations",
+              "minItems": 0
+            }
+          },
+          "title": "Parameters",
+          "additionalProperties": false
+        },
+        "text": {
+          "type": "object",
+          "id": "http://jsonschema.net/customer-collector/text",
+          "required": true,
+          "properties": {
+            "controls": {
+              "type": "object",
+              "id": "http://jsonschema.net/customer-collector/text/controls",
+              "required": true,
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/firstName",
+                  "required": true,
+                  "title": "First Name"
+                },
+                "lastName": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/lastName",
+                  "required": true,
+                  "title": "Last Name"
+                },
+                "email": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/email",
+                  "required": true,
+                  "title": "Email"
+                },
+                "contactNumber": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/contactNumber",
+                  "required": true,
+                  "title": "Contact Number"
+                },
+                "contactNumberType": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/contactNumberType",
+                  "required": true,
+                  "title": "Contact Number Type"
+                },
+                "message": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/message",
+                  "required": true,
+                  "title": "Message"
+                },
+                "contactTime": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/contactTime",
+                  "required": true,
+                  "title": "Contact Time"
+                },
+                "sendInProgress": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/sendInProgress",
+                  "required": true,
+                  "title": "Send In Progress"
+                },
+                "submit": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/submit",
+                  "required": true,
+                  "title": "Submit"
+                },
+                "cancel": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/cancel",
+                  "required": true,
+                  "title": "Cancel"
+                },
+                "finish": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/controls/finish",
+                  "required": true,
+                  "title": "Finish"
+                }
+              },
+              "title": "Controls",
+              "additionalProperties": false
+            },
+            "validation": {
+              "type": "object",
+              "id": "http://jsonschema.net/customer-collector/text/validation",
+              "required": true,
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/validation/firstName",
+                  "required": true,
+                  "title": "First Name"
+                },
+                "lastName": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/validation/lastName",
+                  "required": true,
+                  "title": "Last Name"
+                },
+                "email": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/validation/email",
+                  "required": true,
+                  "title": "Email"
+                },
+                "contactNumber": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/validation/contactNumber",
+                  "required": true,
+                  "title": "Contact Number"
+                },
+                "contactNumberType": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/validation/contactNumberType",
+                  "required": true,
+                  "title": "Contact Number Type"
+                },
+                "contactTime": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/customer-collector/text/validation/contactTime",
+                  "required": true,
+                  "title": "Contact Time"
+                }
+              },
+              "title": "Validation",
+              "additionalProperties": false
+            }
+          },
+          "title": "Text",
+          "additionalProperties": false
+        },
+        "integration": {
+          "type": "object",
+          "id": "http://jsonschema.net/customer-collector/integration",
+          "required": true,
+          "properties": {
+            "logOnly": {
+              "type": "boolean",
+              "id": "http://jsonschema.net/customer-collector/integration/logOnly",
+              "required": true,
+              "title": "Log Only"
+            }
+          },
+          "title": "Integration",
+          "additionalProperties": false
+        }
+      },
+      "title": "Customer-collector",
+      "additionalProperties": false
+    },
+    "wiwo-repayment-widget": {
+      "type": "object",
+      "id": "http://jsonschema.net/wiwo-repayment-widget",
+      "required": true,
+      "properties": {
+        "defaults": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/defaults",
+          "required": true,
+          "properties": {
+            "repaymentModel": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel",
+              "required": true,
+              "properties": {
+                "propertyValue": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/propertyValue",
+                  "required": true,
+                  "title": "Property Value"
+                },
+                "principal": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/principal",
+                  "required": true,
+                  "title": "Principal"
+                },
+                "term": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/term",
+                  "required": true,
+                  "title": "Term"
+                },
+                "interestRate": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/interestRate",
+                  "required": true,
+                  "title": "Interest Rate"
+                },
+                "repaymentType": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/repaymentType",
+                  "required": true,
+                  "title": "Repayment Type"
+                },
+                "repaymentFrequency": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/repaymentFrequency",
+                  "required": true,
+                  "title": "Repayment Frequency"
+                },
+                "product": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/product",
+                  "required": true,
+                  "title": "Product"
+                },
+                "productGroup": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/repaymentModel/productGroup",
+                  "required": true,
+                  "title": "Product Group"
+                }
+              },
+              "title": "Repayment Model",
+              "additionalProperties": false
+            },
+            "savingsModel": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/savingsModel",
+              "required": true,
+              "properties": {
+                "savingsEnabled": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/savingsModel/savingsEnabled",
+                  "required": true,
+                  "title": "Savings Enabled"
+                },
+                "extraRepayment": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/savingsModel/extraRepayment",
+                  "required": true,
+                  "title": "Extra Repayment"
+                },
+                "offset": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/savingsModel/offset",
+                  "required": true,
+                  "title": "Offset"
+                },
+                "lumpSum": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/savingsModel/lumpSum",
+                  "required": true,
+                  "title": "Lump Sum"
+                },
+                "lumpSumYear": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/savingsModel/lumpSumYear",
+                  "required": true,
+                  "title": "Lump Sum Year"
+                }
+              },
+              "title": "Savings Model",
+              "additionalProperties": false
+            },
+            "rpyControlViewModel": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/rpyControlViewModel",
+              "required": true,
+              "properties": {
+                "controlsExpandedMode": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/rpyControlViewModel/controlsExpandedMode",
+                  "required": false,
+                  "title": "Controls Expanded Mode"
+                },
+                "enableModeSwitch": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/rpyControlViewModel/enableModeSwitch",
+                  "required": true,
+                  "title": "Enable Mode Switch"
+                },
+                "teaserStart": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/defaults/rpyControlViewModel/teaserStart",
+                  "required": true,
+                  "title": "Teaser Start"
+                }
+              },
+              "title": "Rpy Control View Model",
+              "additionalProperties": false
+            }
+          },
+          "title": "Defaults",
+          "additionalProperties": false
+        },
+        "parameters": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters",
+          "required": true,
+          "properties": {
+            "repaymentConfig": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentConfig",
+              "required": true,
+              "properties": {
+                "repaymentStyle": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentConfig/repaymentStyle",
+                  "required": true,
+                  "title": "Repayment Style"
+                },
+                "allowedFrequencies": {
+                  "type": "array",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentConfig/allowedFrequencies",
+                  "required": true,
+                  "items": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentConfig/allowedFrequencies/0",
+                    "required": true
+                  },
+                  "title": "Allowed Frequencies"
+                },
+                "principalLookup": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentConfig/principalLookup",
+                  "required": true,
+                  "title": "Principal Lookup"
+                }
+              },
+              "title": "Repayment Config",
+              "additionalProperties": false
+            },
+            "repaymentFrequency": {
+              "type": "array",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency",
+              "required": true,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0/label",
+                    "required": true,
+                    "title": "Label"
+                  },
+                  "single": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0/single",
+                    "required": true,
+                    "title": "Single"
+                  },
+                  "plural": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0/plural",
+                    "required": true,
+                    "title": "Plural"
+                  },
+                  "periodsPerYear": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0/periodsPerYear",
+                    "required": true,
+                    "title": "Periods Per Year"
+                  },
+                  "periodsPerMonth": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/repaymentFrequency/0/periodsPerMonth",
+                    "required": true,
+                    "title": "Periods Per Month"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Repayment Frequency"
+            },
+            "infographic": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/infographic",
+              "required": true,
+              "properties": {
+                "autoscrollTerm": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/infographic/autoscrollTerm",
+                  "required": true,
+                  "title": "Autoscroll Term"
+                }
+              },
+              "title": "Infographic",
+              "additionalProperties": false
+            },
+            "constraint": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint",
+              "required": true,
+              "properties": {
+                "repaymentConstraint": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint",
+                  "required": true,
+                  "properties": {
+                    "propertyValue": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue",
+                      "required": true,
+                      "properties": {
+                        "constraints": {
+                          "type": "array",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/constraints",
+                          "required": false,
+                          "items": {
+                            "type": "object",
+                            "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/constraints/0",
+                            "required": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/constraints/0/id",
+                                "required": true,
+                                "title": "Id"
+                              },
+                              "value": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/constraints/0/value",
+                                "required": true,
+                                "title": "Value"
+                              },
+                              "step": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/constraints/0/step",
+                                "required": true,
+                                "title": "Step"
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "title": "Constraints",
+                          "description": "^^^ Constraints used by Smart Sliders - if any are defined then they precedence over Standard Slider's Min, Max, Step:",
+                          "minItems": 0
+                        },
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/propertyValue/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Property Value",
+                      "additionalProperties": false
+                    },
+                    "principal": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal",
+                      "required": true,
+                      "properties": {
+                        "constraints": {
+                          "type": "array",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/constraints",
+                          "required": false,
+                          "items": {
+                            "type": "object",
+                            "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/constraints/0",
+                            "required": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/constraints/0/id",
+                                "required": true,
+                                "title": "Id"
+                              },
+                              "value": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/constraints/0/value",
+                                "required": true,
+                                "title": "Value"
+                              },
+                              "step": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/constraints/0/step",
+                                "required": true,
+                                "title": "Step"
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "title": "Constraints",
+                          "description": "^^^ Constraints used by Smart Sliders - if any are defined then they precedence over Standard Slider's Min, Max, Step:",
+                          "minItems": 0
+                        },
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/principal/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Principal",
+                      "additionalProperties": false
+                    },
+                    "term": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/term",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/term/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/term/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/term/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Term",
+                      "additionalProperties": false
+                    },
+                    "interestRate": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/interestRate",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/interestRate/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/interestRate/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/interestRate/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Interest Rate",
+                      "additionalProperties": false
+                    },
+                    "hideInterestRateSlider": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/hideInterestRateSlider",
+                      "required": true,
+                      "title": "Hide Interest Rate Slider"
+                    },
+                    "showComparisonRateInline": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/repaymentConstraint/showComparisonRateInline",
+                      "required": true,
+                      "title": "Show Comparison Rate Inline"
+                    }
+                  },
+                  "title": "Repayment Constraint",
+                  "additionalProperties": false
+                },
+                "savingsConstraint": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint",
+                  "required": true,
+                  "properties": {
+                    "extraRepayment": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment",
+                      "required": true,
+                      "properties": {
+                        "constraints": {
+                          "type": "array",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/constraints",
+                          "required": false,
+                          "items": {
+                            "type": "object",
+                            "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/constraints/0",
+                            "required": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/constraints/0/id",
+                                "required": true,
+                                "title": "Id"
+                              },
+                              "value": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/constraints/0/value",
+                                "required": true,
+                                "title": "Value"
+                              },
+                              "step": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/constraints/0/step",
+                                "required": true,
+                                "title": "Step"
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "title": "Constraints",
+                          "description": "^^^ Constraints used by Smart Sliders - if any are defined then they precedence over Standard Slider's Min, Max, Step:",
+                          "minItems": 0
+                        },
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/extraRepayment/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Extra Repayment",
+                      "additionalProperties": false
+                    },
+                    "offset": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset",
+                      "required": true,
+                      "properties": {
+                        "constraints": {
+                          "type": "array",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/constraints",
+                          "required": false,
+                          "items": {
+                            "type": "object",
+                            "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/constraints/0",
+                            "required": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/constraints/0/id",
+                                "required": true,
+                                "title": "Id"
+                              },
+                              "value": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/constraints/0/value",
+                                "required": true,
+                                "title": "Value"
+                              },
+                              "step": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/constraints/0/step",
+                                "required": true,
+                                "title": "Step"
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "title": "Constraints",
+                          "description": "^^^ Constraints used by Smart Sliders - if any are defined then they precedence over Standard Slider's Min, Max, Step:",
+                          "minItems": 0
+                        },
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/offset/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Offset",
+                      "additionalProperties": false
+                    },
+                    "lumpSum": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum",
+                      "required": true,
+                      "properties": {
+                        "constraints": {
+                          "type": "array",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/constraints",
+                          "required": false,
+                          "items": {
+                            "type": "object",
+                            "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/constraints/0",
+                            "required": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/constraints/0/id",
+                                "required": true,
+                                "title": "Id"
+                              },
+                              "value": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/constraints/0/value",
+                                "required": true,
+                                "title": "Value"
+                              },
+                              "step": {
+                                "type": "number",
+                                "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/constraints/0/step",
+                                "required": true,
+                                "title": "Step"
+                              }
+                            },
+                            "additionalProperties": false
+                          },
+                          "title": "Constraints",
+                          "description": "^^^ Constraints used by Smart Sliders - if any are defined then they precedence over Standard Slider's Min, Max, Step:",
+                          "minItems": 0
+                        },
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSum/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Lump Sum",
+                      "additionalProperties": false
+                    },
+                    "lumpSumYear": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSumYear",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSumYear/min",
+                          "required": false,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSumYear/max",
+                          "required": false,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/lumpSumYear/step",
+                          "required": false,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Lump Sum Year",
+                      "additionalProperties": false
+                    },
+                    "hideDisabledControls": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/savingsConstraint/hideDisabledControls",
+                      "required": false,
+                      "title": "Hide Disabled Controls"
+                    }
+                  },
+                  "title": "Savings Constraint",
+                  "additionalProperties": false
+                },
+                "feeConstraint": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint",
+                  "required": true,
+                  "properties": {
+                    "initial": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/initial",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/initial/min",
+                          "required": true,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/initial/max",
+                          "required": true,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/initial/step",
+                          "required": true,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Initial",
+                      "additionalProperties": false
+                    },
+                    "discharge": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/discharge",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/discharge/min",
+                          "required": true,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/discharge/max",
+                          "required": true,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/discharge/step",
+                          "required": true,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Discharge",
+                      "additionalProperties": false
+                    },
+                    "regular": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/regular",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/regular/min",
+                          "required": true,
+                          "title": "Min"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/regular/max",
+                          "required": true,
+                          "title": "Max"
+                        },
+                        "step": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/regular/step",
+                          "required": true,
+                          "title": "Step"
+                        }
+                      },
+                      "title": "Regular",
+                      "additionalProperties": false
+                    },
+                    "regularFrequencies": {
+                      "type": "array",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/regularFrequencies",
+                      "required": true,
+                      "items": {
+                        "type": "string",
+                        "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/feeConstraint/regularFrequencies/0",
+                        "required": true
+                      },
+                      "title": "Regular Frequencies"
+                    }
+                  },
+                  "title": "Fee Constraint",
+                  "additionalProperties": false
+                },
+                "lvr": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr",
+                  "required": true,
+                  "properties": {
+                    "propertyValueEnabled": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr/propertyValueEnabled",
+                      "required": true,
+                      "title": "Property Value Enabled"
+                    },
+                    "lvrConfig": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr/lvrConfig",
+                      "required": true,
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr/lvrConfig/min",
+                          "required": true,
+                          "title": "Min"
+                        },
+                        "defaultValue": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr/lvrConfig/defaultValue",
+                          "required": true,
+                          "title": "Default Value"
+                        },
+                        "max": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr/lvrConfig/max",
+                          "required": true,
+                          "title": "Max"
+                        },
+                        "roundingUnits": {
+                          "type": "number",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/lvr/lvrConfig/roundingUnits",
+                          "required": true,
+                          "title": "Rounding Units"
+                        }
+                      },
+                      "title": "Lvr Config",
+                      "additionalProperties": false
+                    }
+                  },
+                  "title": "Lvr",
+                  "additionalProperties": false
+                },
+                "fee": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/fee",
+                  "required": true,
+                  "properties": {
+                    "feeEnabled": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/fee/feeEnabled",
+                      "required": true,
+                      "title": "Fee Enabled"
+                    },
+                    "annualFeeInitialPeriod": {
+                      "type": "number",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/fee/annualFeeInitialPeriod",
+                      "required": false,
+                      "title": "Annual Fee Initial Period",
+                      "default": 1,
+                      "description": "<div><p>When annual fee is first paid.</p><p>Valid enumeration values: </p><ul> <li>0: Annual fee first paid in period 0</li> <li>1: Annual fee first paid in period 1</li> <li>-1: Annual fee paid after first year</li> <li>-2: Annual fee paid in period 1 if there is no initial fee; otherwise after year 1 (combination of 1 and -1)</li> </ul> </div>"
+                    },
+                    "labels": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/fee/labels",
+                      "required": true,
+                      "properties": {
+                        "annual": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/fee/labels/annual",
+                          "required": true,
+                          "title": "Annual"
+                        },
+                        "month": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/fee/labels/month",
+                          "required": true,
+                          "title": "Month"
+                        }
+                      },
+                      "title": "Labels",
+                      "additionalProperties": false
+                    }
+                  },
+                  "title": "Fee",
+                  "additionalProperties": false
+                },
+                "personalisedComparisonRate": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/personalisedComparisonRate",
+                  "required": true,
+                  "properties": {
+                    "showPcr": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/personalisedComparisonRate/showPcr",
+                      "required": true,
+                      "title": "Show Pcr"
+                    }
+                  },
+                  "title": "Personalised Comparison Rate",
+                  "additionalProperties": false
+                },
+                "options": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/options",
+                  "required": true,
+                  "properties": {
+                    "disableInterestOnly": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/options/disableInterestOnly",
+                      "required": true,
+                      "title": "Disable Interest Only",
+                      "default": false
+                    },
+                    "showComparisonRate": {
+                      "type": "boolean",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/parameters/constraint/options/showComparisonRate",
+                      "required": true,
+                      "title": "Show Comparison Rate"
+                    }
+                  },
+                  "title": "Options",
+                  "additionalProperties": false
+                }
+              },
+              "title": "Constraint",
+              "additionalProperties": false
+            }
+          },
+          "title": "Parameters",
+          "additionalProperties": false
+        },
+        "text": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/text",
+          "required": true,
+          "properties": {
+            "assumptions": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/assumptions",
+              "required": true,
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/assumptions/title",
+                  "required": true,
+                  "title": "Title"
+                },
+                "content": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/assumptions/content",
+                  "required": true,
+                  "title": "Content"
+                }
+              },
+              "title": "Assumptions",
+              "additionalProperties": false
+            },
+            "disclaimer": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/disclaimer",
+              "required": true,
+              "properties": {
+                "showDisclaimer": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/disclaimer/showDisclaimer",
+                  "required": true,
+                  "title": "Show Disclaimer"
+                },
+                "content": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/disclaimer/content",
+                  "required": true,
+                  "title": "Content"
+                }
+              },
+              "title": "Disclaimer",
+              "additionalProperties": false
+            },
+            "controls": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls",
+              "required": true,
+              "properties": {
+                "appTitle": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/appTitle",
+                  "required": false,
+                  "title": "App Title"
+                },
+                "currency": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/currency",
+                  "required": true,
+                  "title": "Currency"
+                },
+                "years": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/years",
+                  "required": true,
+                  "title": "Years"
+                },
+                "year": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/year",
+                  "required": true,
+                  "title": "Year"
+                },
+                "percentageSuffix": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/percentageSuffix",
+                  "required": true,
+                  "title": "Percentage Suffix"
+                },
+                "repaymentFrequency": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/repaymentFrequency",
+                  "required": true,
+                  "title": "Repayment Frequency"
+                },
+                "product": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/product",
+                  "required": true,
+                  "title": "Product"
+                },
+                "productGroup": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/productGroup",
+                  "required": true,
+                  "title": "Product Group"
+                },
+                "repaymentType": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/repaymentType",
+                  "required": true,
+                  "title": "Repayment Type"
+                },
+                "interestRate": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/interestRate",
+                  "required": true,
+                  "title": "Interest Rate"
+                },
+                "comparisonRate": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/comparisonRate",
+                  "required": true,
+                  "title": "Comparison Rate"
+                },
+                "propertyValue": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/propertyValue",
+                  "required": true,
+                  "title": "Property Value"
+                },
+                "loanAmount": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/loanAmount",
+                  "required": true,
+                  "title": "Loan Amount"
+                },
+                "loanTerm": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/loanTerm",
+                  "required": true,
+                  "title": "Loan Term"
+                },
+                "optionsToSaveButton": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/optionsToSaveButton",
+                  "required": true,
+                  "title": "Options To Save Button"
+                },
+                "optionsToSave": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/optionsToSave",
+                  "required": true,
+                  "title": "Options To Save"
+                },
+                "extraRepayment": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/extraRepayment",
+                  "required": true,
+                  "title": "Extra Repayment"
+                },
+                "offsetAmount": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/offsetAmount",
+                  "required": true,
+                  "title": "Offset Amount"
+                },
+                "lumpSum": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/lumpSum",
+                  "required": true,
+                  "title": "Lump Sum"
+                },
+                "lumpSumYear": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/lumpSumYear",
+                  "required": true,
+                  "title": "Lump Sum Year"
+                },
+                "initialFee": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/initialFee",
+                  "required": true,
+                  "title": "Initial Fee"
+                },
+                "dischargeFee": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/dischargeFee",
+                  "required": true,
+                  "title": "Discharge Fee"
+                },
+                "regularFee": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/regularFee",
+                  "required": true,
+                  "title": "Regular Fee"
+                },
+                "regularFeeFrequency": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/regularFeeFrequency",
+                  "required": true,
+                  "title": "Regular Fee Frequency"
+                },
+                "loanTab": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/loanTab",
+                  "required": true,
+                  "title": "Loan Tab"
+                },
+                "savingsTab": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/savingsTab",
+                  "required": true,
+                  "title": "Savings Tab"
+                },
+                "print": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/print",
+                  "required": true,
+                  "title": "Print"
+                },
+                "information": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/information",
+                  "required": true,
+                  "title": "Information"
+                },
+                "showRepaymentControls": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/showRepaymentControls",
+                  "required": false,
+                  "title": "Show Repayment Controls"
+                },
+                "hideRepaymentControls": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/hideRepaymentControls",
+                  "required": false,
+                  "title": "Hide Repayment Controls"
+                },
+                "teaserCalcButton": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/controls/teaserCalcButton",
+                  "required": false,
+                  "title": "Teaser Calc Button"
+                }
+              },
+              "title": "Controls",
+              "additionalProperties": false
+            },
+            "results": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/results",
+              "required": true,
+              "properties": {
+                "fixedRepayment": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/fixedRepayment",
+                  "required": true,
+                  "title": "Fixed Repayment"
+                },
+                "regularRepayment": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/regularRepayment",
+                  "required": true,
+                  "title": "Regular Repayment"
+                },
+                "initialRepayment": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/initialRepayment",
+                  "required": true,
+                  "title": "Initial Repayment"
+                },
+                "ongoingRepayment": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/ongoingRepayment",
+                  "required": true,
+                  "title": "Ongoing Repayment"
+                },
+                "over": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/over",
+                  "required": true,
+                  "title": "Over"
+                },
+                "totalInterestPayable": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/totalInterestPayable",
+                  "required": true,
+                  "title": "Total Interest Payable"
+                },
+                "personalisedComparisonRate": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/personalisedComparisonRate",
+                  "required": true,
+                  "title": "Personalised Comparison Rate"
+                },
+                "totalLoanAmount": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/totalLoanAmount",
+                  "required": true,
+                  "title": "Total Loan Amount"
+                },
+                "loanDuration": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/loanDuration",
+                  "required": true,
+                  "title": "Loan Duration"
+                },
+                "contactUs": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/contactUs",
+                  "required": true,
+                  "title": "Contact Us"
+                },
+                "contactUsUrl": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/contactUsUrl",
+                  "required": true,
+                  "title": "Contact Us Url"
+                },
+                "contactUsTarget": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/contactUsTarget",
+                  "required": true,
+                  "title": "Contact Us Target"
+                },
+                "outstanding": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/outstanding",
+                  "required": true,
+                  "title": "Outstanding"
+                },
+                "principal": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/principal",
+                  "required": true,
+                  "title": "Principal"
+                },
+                "interest": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/interest",
+                  "required": true,
+                  "title": "Interest"
+                },
+                "loanTerm": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/loanTerm",
+                  "required": true,
+                  "title": "Loan Term"
+                },
+                "interestSaved": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/interestSaved",
+                  "required": true,
+                  "title": "Interest Saved"
+                },
+                "allSavingsDisabledMsg": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/allSavingsDisabledMsg",
+                  "required": false,
+                  "title": "All Savings Disabled Msg"
+                },
+                "savingsIntroMsg": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/savingsIntroMsg",
+                  "required": false,
+                  "title": "Savings Intro Msg"
+                },
+                "timeSaved": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timeSaved",
+                  "required": true,
+                  "title": "Time Saved"
+                },
+                "results": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/results",
+                  "required": true,
+                  "title": "Results"
+                },
+                "frequencyAt": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/frequencyAt",
+                  "required": true,
+                  "title": "Frequency At"
+                },
+                "interestSuffix": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/interestSuffix",
+                  "required": true,
+                  "title": "Interest Suffix"
+                },
+                "tableTitle": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/tableTitle",
+                  "required": false,
+                  "title": "Table Title"
+                },
+                "tablePeriod": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/tablePeriod",
+                  "required": true,
+                  "title": "Table Period"
+                },
+                "tablePrincipal": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/tablePrincipal",
+                  "required": true,
+                  "title": "Table Principal"
+                },
+                "tablePayment": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/tablePayment",
+                  "required": true,
+                  "title": "Table Payment"
+                },
+                "tableInterest": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/tableInterest",
+                  "required": true,
+                  "title": "Table Interest"
+                },
+                "tableBalance": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/tableBalance",
+                  "required": true,
+                  "title": "Table Balance"
+                },
+                "timePlurals": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals",
+                  "required": true,
+                  "properties": {
+                    "year": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/year",
+                      "required": true,
+                      "properties": {
+                        "1": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/year/1",
+                          "required": true,
+                          "title": "1"
+                        },
+                        "other": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/year/other",
+                          "required": true,
+                          "title": "Other"
+                        }
+                      },
+                      "title": "Year",
+                      "additionalProperties": false
+                    },
+                    "month": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/month",
+                      "required": true,
+                      "properties": {
+                        "1": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/month/1",
+                          "required": true,
+                          "title": "1"
+                        },
+                        "other": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/month/other",
+                          "required": true,
+                          "title": "Other"
+                        }
+                      },
+                      "title": "Month",
+                      "additionalProperties": false
+                    },
+                    "fortnight": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/fortnight",
+                      "required": true,
+                      "properties": {
+                        "1": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/fortnight/1",
+                          "required": true,
+                          "title": "1"
+                        },
+                        "other": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/fortnight/other",
+                          "required": true,
+                          "title": "Other"
+                        }
+                      },
+                      "title": "Fortnight",
+                      "additionalProperties": false
+                    },
+                    "week": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/week",
+                      "required": true,
+                      "properties": {
+                        "1": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/week/1",
+                          "required": true,
+                          "title": "1"
+                        },
+                        "other": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/text/results/timePlurals/week/other",
+                          "required": true,
+                          "title": "Other"
+                        }
+                      },
+                      "title": "Week",
+                      "additionalProperties": false
+                    }
+                  },
+                  "title": "Time Plurals",
+                  "additionalProperties": false
+                }
+              },
+              "title": "Results",
+              "additionalProperties": false
+            },
+            "callToAction": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction",
+              "required": true,
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/enabled",
+                  "required": true,
+                  "title": "Enabled"
+                },
+                "actions": {
+                  "type": "array",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/actions",
+                  "required": true,
+                  "items": {
+                    "type": "object",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/actions/0",
+                    "required": true,
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/actions/0/text",
+                        "required": true,
+                        "title": "Text"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "title": "Actions"
+                }
+              },
+              "title": "Call To Action",
+              "additionalProperties": false
+            },
+            "tooltips": {
+              "type": "array",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/tooltips",
+              "required": true,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/wiwo-repayment-widget/text/tooltips/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/text/tooltips/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "tooltip": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/text/tooltips/0/tooltip",
+                    "required": true,
+                    "title": "Tooltip"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Tooltips"
+            },
+            "chart": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/chart",
+              "required": true,
+              "properties": {
+                "xTitle": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/chart/xTitle",
+                  "required": true,
+                  "title": "X Title"
+                },
+                "yTitle": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/chart/yTitle",
+                  "required": true,
+                  "title": "Y Title"
+                },
+                "chartTitle": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/chart/chartTitle",
+                  "required": false,
+                  "title": "Chart Title"
+                }
+              },
+              "title": "Chart",
+              "additionalProperties": false
+            }
+          },
+          "title": "Text",
+          "additionalProperties": false
+        },
+        "products": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/products",
+          "required": true,
+          "properties": {
+            "productPanel": {
+              "type": "array",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel",
+              "required": true,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "title": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/title",
+                    "required": true,
+                    "title": "Title"
+                  },
+                  "leadSentence": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/leadSentence",
+                    "required": true,
+                    "title": "Lead Sentence"
+                  },
+                  "featureList": {
+                    "type": "array",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/featureList",
+                    "required": false,
+                    "items": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/featureList/0",
+                      "required": true
+                    },
+                    "title": "Feature List",
+                    "minItems": 0
+                  },
+                  "buttonTitle": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/buttonTitle",
+                    "required": false,
+                    "title": "Button Title"
+                  },
+                  "buttonUrl": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/buttonUrl",
+                    "required": false,
+                    "title": "Button Url"
+                  },
+                  "buttonTarget": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productPanel/0/buttonTarget",
+                    "required": false,
+                    "title": "Button Target"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Product Panel"
+            },
+            "productGroupsEnabled": {
+              "type": "boolean",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroupsEnabled",
+              "required": true,
+              "title": "Product Groups Enabled",
+              "default": false
+            },
+            "hideProductGroups": {
+              "type": "boolean",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/products/hideProductGroups",
+              "required": true,
+              "title": "Hide Product Groups"
+            },
+            "productGroups": {
+              "type": "array",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroups",
+              "required": true,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroups/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroups/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroups/0/label",
+                    "required": true,
+                    "title": "Label"
+                  },
+                  "groupedProducts": {
+                    "type": "array",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroups/0/groupedProducts",
+                    "required": true,
+                    "items": {
+                      "type": "string",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/products/productGroups/0/groupedProducts/0",
+                      "required": true
+                    },
+                    "title": "Grouped Products"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Product Groups"
+            }
+          },
+          "title": "Products",
+          "additionalProperties": false
+        },
+        "videoPanel": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel",
+          "required": true,
+          "properties": {
+            "defaults": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/defaults",
+              "required": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/defaults/id",
+                  "required": true,
+                  "title": "Id"
+                },
+                "videoEmbed": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/defaults/videoEmbed",
+                  "required": false,
+                  "title": "Video Embed"
+                },
+                "videoUrl": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/defaults/videoUrl",
+                  "required": false,
+                  "title": "Video Url"
+                },
+                "width": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/defaults/width",
+                  "required": false,
+                  "title": "Width"
+                },
+                "height": {
+                  "type": "number",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/defaults/height",
+                  "required": false,
+                  "title": "Height"
+                }
+              },
+              "title": "Defaults",
+              "additionalProperties": false
+            },
+            "products": {
+              "type": "array",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products",
+              "required": true,
+              "items": {
+                "type": "object",
+                "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products/0",
+                "required": true,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products/0/id",
+                    "required": true,
+                    "title": "Id"
+                  },
+                  "videoEmbed": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products/0/videoEmbed",
+                    "required": false,
+                    "title": "Video Embed"
+                  },
+                  "videoUrl": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products/0/videoUrl",
+                    "required": false,
+                    "title": "Video Url"
+                  },
+                  "width": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products/0/width",
+                    "required": false,
+                    "title": "Width"
+                  },
+                  "height": {
+                    "type": "number",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/videoPanel/products/0/height",
+                    "required": false,
+                    "title": "Height"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Products"
+            }
+          },
+          "title": "Video Panel",
+          "additionalProperties": false
+        },
+        "accessibility": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/accessibility",
+          "required": true,
+          "properties": {
+            "tabToTooltip": {
+              "type": "boolean",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/accessibility/tabToTooltip",
+              "required": true,
+              "title": "Tab To Tooltip"
+            }
+          },
+          "title": "Accessibility",
+          "additionalProperties": false
+        },
+        "view": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/view",
+          "required": true,
+          "properties": {
+            "results": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/view/results",
+              "required": true,
+              "properties": {
+                "defaultView": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/defaultView",
+                  "required": true,
+                  "title": "Default View"
+                },
+                "resultOrder": {
+                  "type": "array",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultOrder",
+                  "required": true,
+                  "items": {
+                    "type": "string",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultOrder/0",
+                    "required": true
+                  },
+                  "title": "Result Order"
+                },
+                "resultTypes": {
+                  "type": "object",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes",
+                  "required": true,
+                  "properties": {
+                    "house": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/house",
+                      "required": true,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/house/id",
+                          "required": true,
+                          "title": "Id"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/house/icon",
+                          "required": true,
+                          "title": "Icon"
+                        },
+                        "tooltip": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/house/tooltip",
+                          "required": true,
+                          "title": "Tooltip"
+                        }
+                      },
+                      "title": "House",
+                      "additionalProperties": false
+                    },
+                    "chart": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/chart",
+                      "required": true,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/chart/id",
+                          "required": true,
+                          "title": "Id"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/chart/icon",
+                          "required": true,
+                          "title": "Icon"
+                        },
+                        "tooltip": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/chart/tooltip",
+                          "required": true,
+                          "title": "Tooltip"
+                        }
+                      },
+                      "title": "Chart",
+                      "additionalProperties": false
+                    },
+                    "table": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/table",
+                      "required": true,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/table/id",
+                          "required": true,
+                          "title": "Id"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/table/icon",
+                          "required": true,
+                          "title": "Icon"
+                        },
+                        "tooltip": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/table/tooltip",
+                          "required": true,
+                          "title": "Tooltip"
+                        }
+                      },
+                      "title": "Table",
+                      "additionalProperties": false
+                    },
+                    "products": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/products",
+                      "required": true,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/products/id",
+                          "required": true,
+                          "title": "Id"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/products/icon",
+                          "required": true,
+                          "title": "Icon"
+                        },
+                        "tooltip": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/products/tooltip",
+                          "required": true,
+                          "title": "Tooltip"
+                        }
+                      },
+                      "title": "Products",
+                      "additionalProperties": false
+                    },
+                    "video": {
+                      "type": "object",
+                      "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/video",
+                      "required": true,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/video/id",
+                          "required": true,
+                          "title": "Id"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/video/icon",
+                          "required": true,
+                          "title": "Icon"
+                        },
+                        "tooltip": {
+                          "type": "string",
+                          "id": "http://jsonschema.net/wiwo-repayment-widget/view/results/resultTypes/video/tooltip",
+                          "required": true,
+                          "title": "Tooltip"
+                        }
+                      },
+                      "title": "Video",
+                      "additionalProperties": false
+                    }
+                  },
+                  "title": "Result Types",
+                  "additionalProperties": false
+                }
+              },
+              "title": "Results",
+              "additionalProperties": false
+            }
+          },
+          "title": "View",
+          "additionalProperties": false
+        },
+        "style": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/style",
+          "required": true,
+          "properties": {
+            "primary": {
+              "type": "string",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/style/primary",
+              "required": true,
+              "title": "Primary"
+            },
+            "secondary": {
+              "type": "string",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/style/secondary",
+              "required": true,
+              "title": "Secondary"
+            },
+            "text": {
+              "type": "string",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/style/text",
+              "required": true,
+              "title": "Text"
+            }
+          },
+          "title": "Style",
+          "additionalProperties": false
+        },
+        "nav": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/nav",
+          "required": true,
+          "properties": {
+            "tabStyle": {
+              "type": "string",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/nav/tabStyle",
+              "required": true,
+              "title": "Tab Style"
+            },
+            "ctaLocation": {
+              "type": "string",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/nav/ctaLocation",
+              "required": false,
+              "title": "Cta Location"
+            }
+          },
+          "title": "Nav",
+          "additionalProperties": false
+        },
+        "admin": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/admin",
+          "required": true,
+          "properties": {
+            "diagnostics": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/admin/diagnostics",
+              "required": true,
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/admin/diagnostics/enabled",
+                  "required": true,
+                  "title": "Enabled"
+                },
+                "trace": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/admin/diagnostics/trace",
+                  "required": true,
+                  "title": "Trace"
+                },
+                "segmentID": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/admin/diagnostics/segmentID",
+                  "required": false,
+                  "title": "Segment ID"
+                }
+              },
+              "title": "Diagnostics",
+              "additionalProperties": false
+            }
+          },
+          "title": "Admin",
+          "additionalProperties": false
+        }
+      },
+      "title": "Wiwo-repayment-widget",
+      "additionalProperties": false
+    }
+  },
+    "customFormItems": {
+        "wiwo-repayment-widget.text.assumptions.content": {
+            "type": "ace",
+            "aceMode": "html",
+            "width": "100%",
+            "height": "200px"
+        }
+        ,"wiwo-repayment-widget.text.callToAction.actions[].text": {
+            "type": "ace",
+            "aceMode": "html",
+            "width": "100%",
+            "height": "200px"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "wiwo-repayment-widget": {
+        "text": {
+            "assumptions": {
+                "title": "Assumptions",
+                "content": "<h3>Calculator Information</h3>  <p>The Repayment Calculator calculates the type of repayment required, at the frequency requested, in respect of the loan parameters entered, namely amount, term and interest rate. The Product selected determines the default interest rate for standard variable products or the default interest rate and fixed period for fixed rate loans. In both scenarios, the customer can manually amend this interest rate. In the case of the fixed rate loans, it will default to the standard variable interest rate once the fixed period has completed.</p>  <p>The Repayment Calculator also calculates the time saved to pay off the loan and the amount of interest saved based on a number of additional inputs from the customer. Included are, if repayments are increased by the entered amount of extra contribution per repayment period, if a single additional lump sum repayment is made, equal to the entered amount of additional lump sum repayment after the loan has been in force for the entered number of years, in addition to continuing the regular repayment and/or 100% of the offset account balance entered is used to reduce the outstanding loan balance per period when calculating interest. </p> <p>These calculations are done at the repayment frequency entered, in respect of the original loan parameters entered, namely amount, annual interest rate and term in years.</p>  <br> <h3>Calculator Assumptions</h3> <h4>Length of Month</h4>  <p>All months are assumed to be of equal length. In reality, many loans accrue on a daily basis leading to a varying number of days' interest dependent on the number of days in the particular month.</p>   <h4>Number of Weeks or Fortnights in a Year</h4>  <p>One year is assumed to contain exactly 52 weeks or 26 fortnights. This implicitly assumes that a year has 364 days rather than the actual 365 or 366.</p>   <h4>Rounding of Amount of Each Repayment</h4>  <p>In practice, repayments are rounded to at least the nearer cent. However the calculator uses the unrounded repayment to derive the amount of interest payable at points along the graph and in total over the full term of the loan. This assumption allows for a smooth graph and equal repayment amounts. Note that the final repayment after the increase in repayment amount, after the additional lump sum repayment amount or the effect of the offset account balance will be a partial repayment as required to reduce the loan balance to zero.</p>   <h4>Rounding of Time Saved</h4>  <p>The time saved is presented as a number of years and months, fortnights or weeks, based on the repayment frequency selected. It assumes the potential partial last repayment when calculating the savings.</p>   <h4>Amount of Interest Saved</h4>  <p>This amount can only be approximated from the amount of time saved and based on the original loan details.</p>   <h3>Calculator Disclaimer</h3> <p>The results from this calculator should be used as an indication only. Results do not represent either quotes or pre-qualifications for the product. Individual institutions apply different formulas. Information such as interest rates quoted and default figures used in the assumptions are subject to change.</p>"
+            },
+            "callToAction": {
+                "enabled": true,
+                "actions": [
+                  {
+                    "text": "<h3>Want this calculator on your website?</h3> <p><a href=\"http://widgetworks.com.au/contact-us\" target=\"_blank\" class=\"btn btn-lg btn-success\">Contact us now for a quote</a></p>"
+                  },
+                  {
+                    "text": "<h3>Want this calculator on your website?</h3> <p><a href=\"http://widgetworks.com.au/contact-us\" target=\"_blank\" class=\"btn btn-lg btn-success\">Contact us now for a quote</a></p>"
+                  }
+                ]
+            }
+        }
+    }
+}

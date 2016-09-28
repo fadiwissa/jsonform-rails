@@ -1,0 +1,93 @@
+{
+  "$wiwoVersion": "wiwo-repayment-widget#11.2.0",
+  "schema": {
+    "wiwo-repayment-widget": {
+      "type": "object",
+      "id": "http://jsonschema.net/wiwo-repayment-widget",
+      "required": true,
+      "properties": {
+        "text": {
+          "type": "object",
+          "id": "http://jsonschema.net/wiwo-repayment-widget/text",
+          "required": true,
+          "properties": {
+            "assumptions": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/assumptions",
+              "required": true,
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/assumptions/title",
+                  "required": true,
+                  "title": "Title"
+                },
+                "content": {
+                  "type": "string",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/assumptions/content",
+                  "required": true,
+                  "title": "Content"
+                }
+              },
+              "title": "Assumptions",
+              "additionalProperties": false
+            },
+            "callToAction": {
+              "type": "object",
+              "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction",
+              "required": true,
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/enabled",
+                  "required": true,
+                  "title": "Enabled"
+                },
+                "actions": {
+                  "type": "array",
+                  "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/actions",
+                  "required": true,
+                  "items": {
+                    "type": "object",
+                    "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/actions/0",
+                    "required": true,
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "id": "http://jsonschema.net/wiwo-repayment-widget/text/callToAction/actions/0/text",
+                        "required": true,
+                        "title": "Text"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "title": "Actions"
+                }
+              },
+              "title": "Call To Action",
+              "additionalProperties": false
+            }
+          },
+          "title": "Text",
+          "additionalProperties": false
+        }
+      },
+      "title": "Wiwo-repayment-widget",
+      "additionalProperties": false
+    }
+  },
+    "customFormItems": {
+        "wiwo-repayment-widget.text.assumptions.content": {
+            "type": "ace",
+            "aceMode": "html",
+            "width": "100%",
+            "height": "200px"
+        }
+        ,"wiwo-repayment-widget.text.callToAction.actions[].text": {
+            "type": "ace",
+            "aceMode": "html",
+            "width": "100%",
+            "height": "200px"
+        }
+    }
+}

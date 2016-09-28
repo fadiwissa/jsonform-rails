@@ -1,0 +1,45 @@
+{
+  "$wiwoVersion": "wiwo-repayment-widget#11.2.0",
+  "schema": {
+    "callToAction": {
+      "type": "object",
+      "id": "http://jsonschema.net/callToAction",
+      "required": true,
+      "properties": {
+        "actions": {
+          "type": "array",
+          "id": "http://jsonschema.net/callToAction/actions",
+          "required": true,
+          "items": {
+            "type": "object",
+            "id": "http://jsonschema.net/callToAction/actions/0",
+            "required": true,
+            "properties": {
+              "text": {
+                "type": "string",
+                "id": "http://jsonschema.net/callToAction/actions/0/text",
+                "required": true,
+                "title": "Text"
+              }
+            },
+            "additionalProperties": false
+          },
+          "title": "Actions"
+        }
+      },
+      "title": "Call To Action",
+      "additionalProperties": false
+    }
+  },
+    "customFormItems": {
+        "callToAction.actions[].text": {
+            "type": "ace",
+            "aceMode": "html",
+            "width": "100%",
+            "height": "200px",
+            "aceOptions": {
+              "xxxwrap": "free"
+            }
+        }
+    }
+}
