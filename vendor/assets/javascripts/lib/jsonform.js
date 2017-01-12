@@ -333,6 +333,18 @@
             'fieldtemplate': true,
             'inputfield': true
         },
+        'json':{
+            'template':'<textarea id="<%= id %>" name="<%= node.name %>" ' +
+                'style="height:<%= elt.height || "150px" %>;width:<%= elt.width || "100%" %>;"' +
+                '<%= (node.disabled? " disabled" : "")%>' +
+                '<%= (node.readOnly ? " readonly=\'readonly\'" : "") %>' +
+                '<%= (node.schemaElement && node.schemaElement.maxLength ? " maxlength=\'" + node.schemaElement.maxLength + "\'" : "") %>' +
+                '<%= (node.schemaElement && node.schemaElement.required ? " required=\'required\'" : "") %>' +
+                '<%= (node.placeholder? "placeholder=" + \'"\' + escape(node.placeholder) + \'"\' : "")%>' +
+                '><%= JSON.stringify(value, null, 2) %></textarea>',
+            'fieldtemplate': true,
+            'inputfield': true
+        },
         'wysihtml5':{
             'template':'<textarea id="<%= id %>" name="<%= node.name %>" style="height:<%= elt.height || "300px" %>;width:<%= elt.width || "100%" %>;"' +
                 '<%= (node.disabled? " disabled" : "")%>' +
@@ -3454,7 +3466,15 @@
                     if (schemaElement.properties) {
                         formElement.type = 'fieldset';
                     } else {
-                        formElement.type = 'textarea';
+                        /**
+                         * Coridyn: previously this was set to 'textarea' which would
+                         * render as '[object Object]' and give validation error.
+                         * 
+                         * Swap to our new 'json' type to handle 
+                         */
+                        // formElement.type = 'textarea';
+                        
+                        formElement.type = 'json';
                     }
                 } else if (!_.isUndefined(schemaElement['enum'])) {
                     formElement.type = 'select';
