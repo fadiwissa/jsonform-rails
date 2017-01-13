@@ -393,7 +393,14 @@
             }
         },
         'ace':{
-            'template':'<div id="<%= id %>" style="position:relative;height:<%= elt.height || "300px" %>;"><div id="<%= id %>__ace" style="width:<%= elt.width || "100%" %>;height:<%= elt.height || "300px" %>;"></div><input type="hidden" name="<%= node.name %>" id="<%= id %>__hidden" value="<%= escape(value) %>"/></div>',
+            'template':[
+'<div id="<%= id %>">' +
+'<div class="resizable" style="position:relative;width:<%= elt.width || "99%" %>;height:<%= elt.height || "300px" %>;">' +
+    '<div id="<%= id %>__ace" style="width:100%; height:100%;"></div>' +
+    '<input type="hidden" name="<%= node.name %>" id="<%= id %>__hidden" value="<%= escape(value) %>"/>' +
+'</div>' +
+'</div>'
+].join(''),
             'fieldtemplate': true,
             'inputfield': true,
             'onInsert': function (evt, node) {
@@ -409,9 +416,9 @@
                     /**
                      * 2017-01-13
                      * Work around `worker-html.js` 404 - just set a no-op $startWorker function.
-                     * Doesn't seem to affect editing functionality...
-                     * 
                      * https://github.com/angular-ui/ui-ace/issues/106
+                     * 
+                     * Doesn't seem to affect editing functionality...
                      */
                     editor.getSession().$startWorker = function(){};
                     
@@ -436,6 +443,13 @@
 
                     // Set the contents of the initial manifest file
                     editor.getSession().setValue(node.value||"");
+    
+                    
+                    /**
+                     * Make editor resizeable
+                     */
+                    initResizable(node.el, editor);
+                    
 
                     //TODO this is clearly sub-optimal
                     // 'Lazily' bind to the onchange 'ace' event to give
@@ -454,6 +468,29 @@
                         $(node.el).find(idSelector).trigger("focus");
                     });
                 };
+                
+                
+                function initResizable(el, editor){
+                    if ($.fn.resizable){
+                        var $r = $(el).find('.resizable');
+                        $r.resizable({
+                            // Allow v-resizing.
+                            handles: 's',
+                            resize: function(event, ui){
+                                editor.resize();
+                            },
+                            create: function(event){
+                                // Double-click on edge to resize to full height of content.
+                                $(event.target).find('.ui-resizable-s').on('dblclick', function(){
+                                    var newHeight = editor.renderer.scrollBarV.scrollHeight + 30;
+                                    $r.height(newHeight);
+                                    
+                                    editor.resize();
+                                });
+                            }
+                        });
+                    }
+                }
 
                 // Is there a setup hook?
                 if (window.jsonform_ace_setup) {
