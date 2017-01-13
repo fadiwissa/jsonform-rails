@@ -2736,9 +2736,18 @@
                     formArray[i].value = {};
                 }
             }
+            
             //TODO is this due to a serialization bug?
+            /**
+             * Special handling for object type that gets rendered as a string.
+             * 
+             * `formNode.prototype.generate()` will convert `null` values to an empty string,
+             * which stuffs up the `data -> editor -> data` round-trip.
+             * 
+             * Coerce "null", "", or '""' to a null object.
+             */
             if ((eltSchema.type === 'object') &&
-                (formArray[i].value === 'null' || formArray[i].value === '')) {
+                (formArray[i].value === 'null' || formArray[i].value === '' || formArray[i].value === '""')) {
                 formArray[i].value = null;
             }
 
