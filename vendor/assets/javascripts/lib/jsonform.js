@@ -405,6 +405,19 @@
                     var formElement = node.formElement || {};
                     var ace = window.ace;
                     var editor = ace.edit($(node.el).find('#' + escapeSelector(node.id) + '__ace').get(0));
+    
+                    /**
+                     * 2017-01-13
+                     * Work around `worker-html.js` 404 - just set a no-op $startWorker function.
+                     * Doesn't seem to affect editing functionality...
+                     * 
+                     * https://github.com/angular-ui/ui-ace/issues/106
+                     */
+                    editor.getSession().$startWorker = function(){};
+                    
+                    // Turn off message about scrolling being removed in future.
+                    editor.$blockScrolling = Number.POSITIVE_INFINITY;
+                    
                     var idSelector = '#' + escapeSelector(node.id) + '__hidden';
                     // Force editor to use "\n" for new lines, not to bump into ACE "\r" conversion issue
                     // (ACE is ok with "\r" on pasting but fails to return "\r" when value is extracted)
