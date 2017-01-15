@@ -1,6 +1,6 @@
 {
   "name" : "json-form",
-  "version" : "1.0.1",
+  "version" : "1.0.4",
   "main" : "./lib/jsonform.js",
   "user" : "Joshfire",
   "domain": "joshfire.com",
