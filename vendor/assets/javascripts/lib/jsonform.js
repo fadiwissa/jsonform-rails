@@ -1823,6 +1823,26 @@
             innerobj[prop] = value;
         }
     };
+    
+    
+    /**
+     * 2017-03-10
+     * 
+     * Normalise jsonschema types to a standard representation.
+     * 
+     * Mainly used for handling arrays of element types (e.g. type: ['string', 'number']
+     * 
+     * Examples:
+     * 
+     * 'string' => 'string'
+     * ['string'] => 'string'
+     * ['string', 'number'] => 'number,string'
+     */
+    var normaliseType = function(type){
+        var arrayType = [].concat(type);
+        var result = arrayType.concat().sort().toString();
+        return result;
+    };
 
 
     /**
@@ -2735,6 +2755,10 @@
 
             // Skip the input field if it's not part of the schema
             if (!eltSchema) continue;
+            
+            // 2017-03-10: Handle arrays of schema types.
+            var eltSchemaType = normaliseType(eltSchema.type);
+            
 
             // Handle multiple checkboxes separately as the idea is to generate
             // an array that contains the list of enumeration items that the user
@@ -2755,15 +2779,21 @@
             }
 
             // Type casting
-            if (eltSchema.type === 'boolean') {
+            if (eltSchemaType === 'boolean') {
                 if (formArray[i].value === '0') {
                     formArray[i].value = false;
                 } else {
                     formArray[i].value = !!formArray[i].value;
                 }
             }
-            if ((eltSchema.type === 'number') ||
-                (eltSchema.type === 'integer')) {
+            /**
+             * 2017-03-10
+             * Add "number,string" handling.
+             * Attempts to handle number and falls back to string otherwise.
+             */
+            if ((eltSchemaType === 'number') ||
+                (eltSchemaType === 'integer') ||
+                (eltSchemaType === 'number,string')) {
                 if (_.isString(formArray[i].value)) {
                     if (!formArray[i].value.length) {
                         formArray[i].value = null;
@@ -2772,12 +2802,12 @@
                     }
                 }
             }
-            if ((eltSchema.type === 'string') &&
+            if ((eltSchemaType === 'string') &&
                 (formArray[i].value === '') &&
                 !eltSchema._jsonform_allowEmpty) {
                 formArray[i].value=null;
             }
-            if ((eltSchema.type === 'object') &&
+            if ((eltSchemaType === 'object') &&
                 _.isString(formArray[i].value) &&
                 (formArray[i].value.substring(0,1) === '{')) {
                 try {
@@ -2789,6 +2819,7 @@
             
             //TODO is this due to a serialization bug?
             /**
+             * 2017-01-13
              * Special handling for object type that gets rendered as a string.
              * 
              * `formNode.prototype.generate()` will convert `null` values to an empty string,
@@ -2796,7 +2827,7 @@
              * 
              * Coerce "null", "", or '""' to a null object.
              */
-            if ((eltSchema.type === 'object') &&
+            if ((eltSchemaType === 'object') &&
                 (formArray[i].value === 'null' || formArray[i].value === '' || formArray[i].value === '""')) {
                 formArray[i].value = null;
             }
@@ -3509,6 +3540,13 @@
 
             // If the form element does not define its type, use the type of
             // the schema element.
+            
+            /**
+             * 2017-03-10
+             * Handle compound data types.
+             */
+            var schemaElementType = normaliseType(schemaElement.type);
+            
             if (!formElement.type) {
                 if ((schemaElement.type === 'string') &&
                     (schemaElement.format === 'color')) {
@@ -3516,7 +3554,8 @@
                 } else if ((schemaElement.type === 'number' ||
                     schemaElement.type === 'integer' ||
                     schemaElement.type === 'string' ||
-                    schemaElement.type === 'any') &&
+                    schemaElement.type === 'any' ||
+                    schemaElementType === 'number,string') &&
                     !schemaElement['enum']) {
                     formElement.type = 'text';
                 } else if (schemaElement.type === 'boolean') {
@@ -3526,6 +3565,7 @@
                         formElement.type = 'fieldset';
                     } else {
                         /**
+                         * 2017-01-13
                          * Coridyn: previously this was set to 'textarea' which would
                          * render as '[object Object]' and give validation error.
                          * 
