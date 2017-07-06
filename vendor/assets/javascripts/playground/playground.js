@@ -250,13 +250,15 @@ $('document').ready(function () {
           // Get the view type.
           var type = node.formElement.type;
           var newView = JSONForm.fieldTypes['table'+type];
-          node.view = newView;
-          
-          // TODO: Wrap each child in a <td></td>.
-          
-          // We should be a leaf node - a text input or something like that.
-          // Can we be a fieldset??
-          console.log('###node.schemaElement.type=', type, ', newView=', newView);
+          if (newView){
+              node.view = newView;
+      
+              // TODO: Wrap each child in a <td></td>.
+      
+              // We should be a leaf node - a text input or something like that.
+              // Can we be a fieldset??
+              console.log('###node.schemaElement.type=', type, ', newView=', newView);
+          }
         }
         
         // node.view = null;
