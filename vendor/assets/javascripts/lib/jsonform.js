@@ -4004,8 +4004,11 @@
      * @function
      * @param {Object} options The JSON Form object to use as basis for the form
      */
-    $.fn.jsonForm = function(options) {
-        var formElt = this;
+    
+    // Fadi Wissa - made this NOT a jQuery method since it was getting "overriden" ...
+    // ... by jQuery (v3+) for some reason (in my ActiveAdmin-based project)
+    jsonForm = function(formElement, options) {
+        var formElt = formElement;
 
         options = _.defaults({}, options, {submitEvent: 'submit'});
 
