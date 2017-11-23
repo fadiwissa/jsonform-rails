@@ -22,7 +22,7 @@ TODO: helpers as the need emerges
 
 Add this line to your application's Gemfile:
 
-    gem 'jsonform-rails'
+    gem 'jsonform-rails', :git => 'https://github.com/fadiwissa/jsonform-rails'
 
 And then execute:
 
@@ -36,7 +36,7 @@ Or install it yourself as:
 
 Step 1: Make sure you're calling the javascript file in your application.js. There is no CSS, jsonform styles for bootstrap and lets you handle that:
 
-    //= require jsonform
+    //= require lib/jsonform
 
 Step 2: Use is as described in the jsonform doco
 
